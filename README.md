@@ -1,10 +1,17 @@
-# 国医大师孙光荣中医知识图谱 · Android
+# 国医大师孙光荣中医知识图谱 · Android App + RAG 智能问答
 
-> **Sun Guangrong TCM Knowledge Graph — Android App**
+> **Sun Guangrong TCM Knowledge Graph — Android App & Graph-RAG Assistant**
 > 研发：**孙光荣大师弟子田建辉团队** 联合 **医哲未来人工智能研究院（IMPF-AI Institute）**
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/psknlr/Master-SGR/blob/claude/tcm-knowledge-graph-app-h709bx/colab/SGR_KG_RAG_Colab.ipynb)
+（徽章直达仅对公开仓库有效；私有仓库请在 Colab 里「上传笔记本」打开 `colab/SGR_KG_RAG_Colab.ipynb`）
+
 把原本只能在桌面浏览器里打开的 `sunguangrong_kg_v2_explorer.html`（7 MB 单文件），
-重制为一款**国风、离线、可签名安装**的 Android 应用。
+重制为两件东西：
+
+1. 一款**国风、离线、可签名安装**的 Android 应用（APK）；
+2. 一份 **Colab 笔记本**——基于同一套图谱做**检索增强（GraphRAG）智能问答**，
+   接 Poe 或 MiniMax，一键生成**公网多轮对话链接**。
 
 | | | |
 |:--:|:--:|:--:|
@@ -12,6 +19,21 @@
 | 卷首 · 大师小传与总览 | 观图 · 19,343 实体星图 | 详情 · 关系与原文佐证 |
 | ![聚焦](docs/shots/focus.png) | ![检索](docs/shots/search.png) | ![夜读](docs/shots/night.png) |
 | 聚焦 · 自我中心网络 | 检索 · 中英文与异名 | 夜读配色 |
+
+---
+
+## 目录
+
+| | |
+|---|---|
+| [一、安装包（APK）](#一安装包) | 已签名，Android 5.0+，纯离线 |
+| [二、应用做了什么](#二应用做了什么) | 国风视觉、五个页面、图谱交互、性能 |
+| [三、布局是怎么算的](#三布局是怎么算的) | 离线力导向预计算 |
+| [四、Colab · RAG 智能问答](#四colab--rag-智能问答) | **接 Poe / MiniMax，公网对话链接** |
+| [五、自行构建](#五自行构建) | 数据流水线与打包 |
+| [六、签名密钥](#六签名密钥) | |
+| [七、目录结构](#七目录结构) | |
+| [八、免责声明](#八免责声明) | |
 
 ---
 
@@ -94,7 +116,83 @@ android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk
 
 ---
 
-## 四、自行构建
+## 四、Colab · RAG 智能问答
+
+> `colab/SGR_KG_RAG_Colab.ipynb` —— 在 Colab 里依次运行各单元格（约 2 分钟），
+> 即可得到一条 `https://xxxxxxxx.gradio.live` 的**公网多轮对话链接**，手机、他人电脑均可直接打开。
+
+| ![问答界面](docs/shots/rag-chat.png) |
+|:--:|
+| 左侧多轮对话，右侧同步展示本轮 RAG **实际检索到的知识图谱数据**——答案与证据一屏对照 |
+
+### 4.1 为什么不是普通的向量 RAG
+
+这套图谱的价值恰恰在于**结构**与**出处**：每条关系都带着原文佐证（`q`）和出处编号（`c`，如 `D3#c0037`），
+还标了知识来源（孙老原创 / 他所编纂 / 经典引文 / 他人临床报道 / 中医通识）。
+把它切成文本块丢进向量库，这些信息就全丢了。所以检索走的是图：
+
+1. **双路召回**　实体索引（名称 / 异名 / 英文 / 类型）+ 原文佐证索引（25,709 条引文）。
+   中医术语高度专名化，佐证原文往往就是答案本身，两路互补。
+2. **中文 BM25**　字符二元组 + 短词整串，不依赖分词器（Colab 无需装 jieba）；
+   再叠加「实体名整串出现在问题里」的强加权。
+3. **一跳图扩展**　以命中实体为种子取邻域，按「佐证质量 / 知识来源 / 种子得分 / 对端得分」打分。
+4. **关系类型轮转采样**　枢纽实体（如「失眠」）挂着几十条同类型关系，
+   不加约束会让结果被「见症→失眠」这种重复三元组塞满。
+   按关系类型分桶轮转，逼出「主治 / 功效 / 辨证为 / 出典」等不同侧面，
+   同时对单一类型设 25% 上限；关系类型本来就少时自动退化为纯按分排序。
+5. **可引用的上下文**　每条关系编号 `[R1][R2]…`，连同原文与出处编号一起送给模型，
+   系统提示要求逐条引用、不得杜撰、并区分「孙老本人的论断」与「他所选编的内容」。
+
+整套检索是纯 numpy 实现，**单次查询 2–5 ms**，索引构建约 5 秒，无需 GPU、无需向量库。
+
+### 4.2 RAG 知识图谱数据（可核验）
+
+两个地方都能看到本轮检索的全部依据，**不配 API Key 也能用**：
+
+- **笔记本第 5 格**——独立的检索预览单元格，改问题重跑即可；
+- **问答界面右侧面板**——随每轮对话实时刷新。
+
+均包含：检索子图（SVG）· 实体表 · 三元组与原文佐证表 · 送入模型的完整上下文。
+
+| ![笔记本 RAG 预览](docs/shots/rag-notebook-cell.png) |
+|:--:|
+| 笔记本第 5 格：子图 + 三元组（含原文佐证与出处编号）+ 实体（含知识来源与关联度） |
+
+### 4.3 模型接入
+
+| 提供方 | 默认模型 | 接口 | 密钥 |
+|---|---|---|---|
+| **Poe** | `claude-sonnet-5` | `https://api.poe.com/v1/chat/completions`（OpenAI 兼容） | <https://poe.com/api_key> |
+| **MiniMax** | `MiniMax-M3` | `https://api.minimaxi.chat/v1/text/chatcompletion_v2`（可切国内站） | 开放平台 → 账户管理 → 接口密钥 |
+
+两家都走流式输出，界面里可随时切换、改模型名、调温度与检索参数。
+
+> **关于 `claude-sonnet-5`**：Poe 的模型名是小写点号风格（`claude-sonnet-4.6`、`minimax-m3`）。
+> 启动时会拉一次 Poe 的公开模型目录做校验——若 `claude-sonnet-5` 尚未在 Poe 上架，
+> 会**自动改用同族最新版本**（当前为 `claude-sonnet-4.6`）并在界面上说明；
+> 等 Poe 上架后无需改任何代码即会自动启用。
+
+密钥建议存进 Colab 左侧 🔑 **Secrets**（`POE_API_KEY` / `MINIMAX_API_KEY`），不会留在笔记本里。
+
+### 4.4 公网链接
+
+`share=True` 会生成 72 小时有效的 `*.gradio.live` 链接。
+链接是公开的——如需限制访问，在启动格填入「访问用户名 / 访问密码」即可加一层口令。
+要长期在线，把 `rag/` 目录部署到 Hugging Face Spaces 或自有服务器：
+
+```bash
+pip install -r rag/requirements.txt
+python rag/app.py --graph graph.json --share            # 生成公网链接
+python rag/app.py --graph graph.json --port 7860 \
+                  --user 用户名 --password 口令          # 本地/服务器带口令
+```
+
+`--graph` 既接受烘焙好的 `graph.json`，也直接接受原始的 `sunguangrong_kg_v2_explorer.html`
+（会自动抽取，RAG 不依赖布局坐标）。
+
+---
+
+## 五、自行构建
 
 ```bash
 # 依赖：JDK 17+、Node 18+、Android SDK（build-tools 35.0.0+、platforms/android-34）
@@ -129,7 +227,7 @@ node tools/shoot.mjs     # 按手机视口逐屏截图并检查 JS 报错
 
 ---
 
-## 五、签名密钥
+## 六、签名密钥
 
 首次构建会在 `android/keystore/sgr-kg-release.jks` 自动生成一把 4096 位 RSA 密钥并复用，
 以保证后续版本能覆盖安装。
@@ -150,7 +248,7 @@ SHA-256     24:0C:CB:B1:20:66:66:90:E4:B3:BC:FF:CC:B1:58:68:C8:A9:E0:4A:2A:42:61
 
 ---
 
-## 六、目录结构
+## 七、目录结构
 
 ```
 sunguangrong_kg_v2_explorer.html      原始桌面版（保留，作为数据源）
@@ -158,6 +256,14 @@ tools/
   layout.mjs                          离线布局预计算（ForceAtlas2 + Barnes-Hut）
   shoot.mjs                           无头浏览器逐屏截图 / 报错检查
   icons.mjs                           生成传统 PNG 启动图标
+  make_notebook.py                    由 rag/*.py 生成 Colab 笔记本（单一真源）
+rag/
+  kg_rag.py                           图谱索引与检索（双路 BM25 + 图扩展 + 子图 SVG）
+  llm_clients.py                      Poe / MiniMax 流式客户端
+  app.py                              Gradio 问答界面（含 RAG 数据面板）
+  requirements.txt
+colab/
+  SGR_KG_RAG_Colab.ipynb              Colab 一键笔记本（由 make_notebook.py 生成）
 android/
   build.sh                            打包 + 签名（无 Gradle）
   keystore/sgr-kg-release.jks         发布密钥
@@ -173,7 +279,7 @@ android/
 
 ---
 
-## 七、免责声明
+## 八、免责声明
 
 本应用为中医药学术研究与教学参考工具，所载内容由文献自动抽取并经抽样审校
 （v2 抽样严格精度 81.7%，n=60；v1 84.9%，n=119），**不能替代执业医师的诊断与处方**。
