@@ -19,9 +19,25 @@ import inspect
 
 import gradio as gr
 
-from kg_rag import KGRag
+from kg_rag import (DEFAULT_MAX_CHARS, DEFAULT_MAX_EDGES, DEFAULT_TOP_SEEDS, KGRag)
 from llm_clients import (DEFAULT_MINIMAX_MODEL, DEFAULT_POE_MODEL, LLMError,
                          MINIMAX_BASE_CN, MINIMAX_BASE_INTL, MiniMaxClient, PoeClient)
+
+SITE_CN = "国内站 api.minimax.chat"
+SITE_INTL = "国际站 api.minimaxi.chat"
+
+# 界面初值。Colab 启动格可以整体覆盖（见 build_demo 的 defaults 参数）。
+UI_DEFAULTS = {
+    "provider": "MiniMax",
+    "poe_model": DEFAULT_POE_MODEL,
+    "mm_model": DEFAULT_MINIMAX_MODEL,
+    "mm_site": SITE_CN,
+    "mm_group": "",
+    "temperature": 0.3,
+    "top_seeds": DEFAULT_TOP_SEEDS,
+    "max_edges": DEFAULT_MAX_EDGES,
+    "max_ctx": DEFAULT_MAX_CHARS,
+}
 
 SYSTEM_PROMPT = """你是「国医大师孙光荣中医知识图谱」的学术问答助手，由孙光荣大师弟子田建辉团队与医哲未来人工智能研究院（IMPF-AI Institute）联合研制。
 
@@ -88,13 +104,21 @@ def _client(provider, poe_key, poe_model, mm_key, mm_model, mm_site, mm_group):
     if provider == "Poe":
         return PoeClient(poe_key or os.environ.get("POE_API_KEY", ""),
                          poe_model or DEFAULT_POE_MODEL)
-    base = MINIMAX_BASE_CN if mm_site == "国内站 api.minimax.chat" else MINIMAX_BASE_INTL
+    base = MINIMAX_BASE_INTL if mm_site == SITE_INTL else MINIMAX_BASE_CN
     return MiniMaxClient(mm_key or os.environ.get("MINIMAX_API_KEY", ""),
                          mm_model or DEFAULT_MINIMAX_MODEL,
                          base_url=base, group_id=mm_group or "")
 
 
-def build_demo(kg: KGRag, share_note: str = "") -> gr.Blocks:
+def build_demo(kg: KGRag, share_note: str = "", show_settings: bool = True,
+               defaults: dict | None = None) -> gr.Blocks:
+    """
+    show_settings=False 时「模型与检索设置」面板整体隐藏（组件仍然存在并生效，
+    只是不显示），适合把参数在 Colab 里定好后交付给他人使用的场景。
+    """
+    D = dict(UI_DEFAULTS)
+    if defaults:
+        D.update({k: v for k, v in defaults.items() if v is not None and v != ""})
 
     def check_model(provider, poe_model, mm_model):
         try:
@@ -185,8 +209,8 @@ def build_demo(kg: KGRag, share_note: str = "") -> gr.Blocks:
 
         with gr.Row():
             # ------------------ 左：多轮对话 ------------------
-            with gr.Column(scale=5):
-                chatbot = _c(gr.Chatbot, type="messages", height=520, label="问答",
+            with gr.Column(scale=9):
+                chatbot = _c(gr.Chatbot, type="messages", height=560, label="问答",
                              avatar_images=(None, None), show_copy_button=True)
                 with gr.Row():
                     box = _c(gr.Textbox, placeholder="请就孙光荣学术思想、辨证、方药、医案提问…",
@@ -199,48 +223,51 @@ def build_demo(kg: KGRag, share_note: str = "") -> gr.Blocks:
                 gr.Examples(EXAMPLES, inputs=box, label="示例问题")
 
             # ------------------ 右：RAG 知识图谱数据 ------------------
-            with gr.Column(scale=4):
+            with gr.Column(scale=11):
                 gr.Markdown("### RAG 知识图谱数据\n"
                             "<span class='sgr-note'>本轮回答实际依据的图谱证据，与左侧答案一一对应。</span>")
-                sub_svg = _c(gr.HTML,
-                             value="<div style='padding:28px;text-align:center;color:#7C6C58'>"
-                                   "提问后在此展示检索到的子图</div>", label="检索子图")
+                with gr.Tab("检索子图"):
+                    sub_svg = _c(gr.HTML,
+                                 value="<div style='padding:28px;text-align:center;color:#7C6C58'>"
+                                       "提问后在此展示检索到的子图</div>", label="检索子图")
                 with gr.Tab("三元组与佐证"):
                     tri_df = _c(gr.Dataframe, headers=r_headers_tri(), interactive=False,
-                                wrap=True, max_height=340, show_label=False,
+                                wrap=True, max_height=520, show_label=False,
                                 column_widths=["7%", "17%", "11%", "17%", "31%", "12%", "10%", "7%"])
                 with gr.Tab("实体"):
                     ent_df = _c(gr.Dataframe, headers=r_headers_ent(), interactive=False,
-                                wrap=True, max_height=340, show_label=False,
+                                wrap=True, max_height=520, show_label=False,
                                 column_widths=["6%", "26%", "13%", "14%", "13%", "9%", "22%"])
                 with gr.Tab("送入模型的上下文"):
-                    ctx_box = _c(gr.Textbox, lines=15, max_lines=15, show_label=False,
+                    ctx_box = _c(gr.Textbox, lines=22, max_lines=22, show_label=False,
                                  show_copy_button=True, interactive=False)
 
-        # ------------------ 设置 ------------------
-        with gr.Accordion("模型与检索设置", open=False):
+        # ------------------ 设置（可整体隐藏） ------------------
+        with _c(gr.Accordion, label="模型与检索设置", open=False, visible=show_settings):
             with gr.Row():
-                provider = gr.Radio(["Poe", "MiniMax"], value="Poe", label="模型提供方", scale=2)
-                temperature = gr.Slider(0.0, 1.0, value=0.3, step=0.05, label="温度", scale=3)
+                provider = gr.Radio(["MiniMax", "Poe"], value=D["provider"],
+                                    label="模型提供方", scale=2)
+                temperature = gr.Slider(0.0, 1.0, value=D["temperature"], step=0.05,
+                                        label="温度", scale=3)
             with gr.Row():
-                with gr.Column():
-                    gr.Markdown("**Poe**　密钥在 https://poe.com/api_key 获取")
-                    poe_model = gr.Textbox(DEFAULT_POE_MODEL, label="Poe 模型",
-                                           info="Poe 上尚未上架时会自动退到同族最新版")
-                    poe_key = gr.Textbox("", label="Poe API Key", type="password",
-                                         placeholder="留空则用环境变量 POE_API_KEY")
                 with gr.Column():
                     gr.Markdown("**MiniMax**　密钥在开放平台「账户管理 - 接口密钥」获取")
-                    mm_model = gr.Textbox(DEFAULT_MINIMAX_MODEL, label="MiniMax 模型")
-                    mm_key = gr.Textbox("", label="MiniMax API Key", type="password",
-                                        placeholder="留空则用环境变量 MINIMAX_API_KEY")
-                    mm_site = gr.Radio(["国际站 api.minimaxi.chat", "国内站 api.minimax.chat"],
-                                       value="国际站 api.minimaxi.chat", label="接入站点")
-                    mm_group = gr.Textbox("", label="GroupId（可选）")
+                    mm_model = gr.Textbox(D["mm_model"], label="MiniMax 模型")
+                    mm_key = _c(gr.Textbox, value="", label="MiniMax API Key", type="password",
+                                placeholder="留空则用环境变量 MINIMAX_API_KEY")
+                    mm_site = gr.Radio([SITE_CN, SITE_INTL], value=D["mm_site"], label="接入站点")
+                    mm_group = gr.Textbox(D["mm_group"], label="GroupId（可选）")
+                with gr.Column():
+                    gr.Markdown("**Poe**　密钥在 https://poe.com/api_key 获取")
+                    poe_model = _c(gr.Textbox, value=D["poe_model"], label="Poe 模型",
+                                   info="Poe 上尚未上架时会自动退到同族最新版")
+                    poe_key = _c(gr.Textbox, value="", label="Poe API Key", type="password",
+                                 placeholder="留空则用环境变量 POE_API_KEY")
             with gr.Row():
-                top_seeds = gr.Slider(3, 16, value=8, step=1, label="种子实体数")
-                max_edges = gr.Slider(12, 90, value=48, step=2, label="检索关系数")
-                max_ctx = gr.Slider(2000, 14000, value=6500, step=500, label="上下文字数上限")
+                top_seeds = gr.Slider(3, 60, value=D["top_seeds"], step=1, label="种子实体数")
+                max_edges = gr.Slider(12, 300, value=D["max_edges"], step=4, label="检索关系数")
+                max_ctx = gr.Slider(2000, 20000, value=D["max_ctx"], step=100,
+                                    label="上下文字数上限")
             check_btn = gr.Button("校验当前模型名", size="sm")
             check_out = gr.Markdown("")
             check_btn.click(check_model, [provider, poe_model, mm_model], check_out)
@@ -290,10 +317,11 @@ def main():
     ap.add_argument("--port", type=int, default=7860)
     ap.add_argument("--user", default="", help="可选：访问用户名")
     ap.add_argument("--password", default="", help="可选：访问密码")
+    ap.add_argument("--hide-settings", action="store_true", help="隐藏「模型与检索设置」面板")
     a = ap.parse_args()
 
     kg = KGRag(a.graph)
-    demo = build_demo(kg)
+    demo = build_demo(kg, show_settings=not a.hide_settings)
     launch(demo, share=a.share, port=a.port,
            auth=(a.user, a.password) if a.user and a.password else None)
 

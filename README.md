@@ -11,7 +11,7 @@
 
 1. 一款**国风、离线、可签名安装**的 Android 应用（APK）；
 2. 一份 **Colab 笔记本**——基于同一套图谱做**检索增强（GraphRAG）智能问答**，
-   接 Poe 或 MiniMax，一键生成**公网多轮对话链接**。
+   接 MiniMax 或 Poe，一键生成**公网多轮对话链接**。
 
 | | | |
 |:--:|:--:|:--:|
@@ -29,7 +29,7 @@
 | [一、安装包（APK）](#一安装包) | 已签名，Android 5.0+，纯离线 |
 | [二、应用做了什么](#二应用做了什么) | 国风视觉、五个页面、图谱交互、性能 |
 | [三、布局是怎么算的](#三布局是怎么算的) | 离线力导向预计算 |
-| [四、Colab · RAG 智能问答](#四colab--rag-智能问答) | **接 Poe / MiniMax，公网对话链接** |
+| [四、Colab · RAG 智能问答](#四colab--rag-智能问答) | **接 MiniMax / Poe，公网对话链接** |
 | [五、自行构建](#五自行构建) | 数据流水线与打包 |
 | [六、签名密钥](#六签名密钥) | |
 | [七、目录结构](#七目录结构) | |
@@ -145,6 +145,9 @@ android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk
 
 整套检索是纯 numpy 实现，**单次查询 2–5 ms**，索引构建约 5 秒，无需 GPU、无需向量库。
 
+默认档位：**种子实体 35 · 关系 120 · 上下文 9,900 字**（上下文长度是硬上限，
+实体清单与关系清单分账，不会因为实体太多把关系挤掉）。
+
 ### 4.2 RAG 知识图谱数据（可核验）
 
 两个地方都能看到本轮检索的全部依据，**不配 API Key 也能用**：
@@ -156,14 +159,29 @@ android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk
 
 | ![笔记本 RAG 预览](docs/shots/rag-notebook-cell.png) |
 |:--:|
-| 笔记本第 5 格：子图 + 三元组（含原文佐证与出处编号）+ 实体（含知识来源与关联度） |
+| 笔记本第 5 格：140 实体 / 120 关系的子图，标签互不遮挡；下接三元组与原文佐证 |
+
+**子图为什么不糊成一团**——放大到 140 个实体后，「圆点各自不重叠」远远不够，
+真正会糊掉的是标签。做法是把「圆点 + 它下方的标签」当作一个**矩形**参与布局：
+
+1. **标签预算**：种子优先、其余按关联度，只给最靠前的若干个实体配标签；
+   其他实体保留为小圆点（鼠标悬停仍有完整名称与类型）。字数上限随实体总数自动收紧。
+2. **力导向**（Fruchterman-Reingold）：黄金角螺旋初始化，斥力 `k²/d`、引力 `d²/k`，
+   重力后期收紧防止分量飘散。
+3. **矩形去重叠松弛**：力导向收敛后，对所有矩形反复沿**穿透较浅的那根轴**互相推开
+   （PRISM 思路），直到无重叠或达到迭代上限——标签因此不会互相压住。
+4. **画布自适应**：尺寸由所有矩形的总面积反推，长宽比贴合版面的实际形状并居中，
+   避免一侧大片留白；底部单开一条图例带，图例不与节点争位。
+5. 标签用同背景色描边做「光晕」（`paint-order="stroke"`），压住从下面穿过的连线。
+
+绘图约 200–400 ms，与检索同在一次响应内完成。
 
 ### 4.3 模型接入
 
 | 提供方 | 默认模型 | 接口 | 密钥 |
 |---|---|---|---|
+| **MiniMax**（默认） | `MiniMax-M3` | `https://api.minimax.chat/v1/text/chatcompletion_v2`（**默认国内站**，可切国际站 `api.minimaxi.chat`） | 开放平台 → 账户管理 → 接口密钥 |
 | **Poe** | `claude-sonnet-5` | `https://api.poe.com/v1/chat/completions`（OpenAI 兼容） | <https://poe.com/api_key> |
-| **MiniMax** | `MiniMax-M3` | `https://api.minimaxi.chat/v1/text/chatcompletion_v2`（可切国内站） | 开放平台 → 账户管理 → 接口密钥 |
 
 两家都走流式输出，界面里可随时切换、改模型名、调温度与检索参数。
 
@@ -174,7 +192,29 @@ android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk
 
 密钥建议存进 Colab 左侧 🔑 **Secrets**（`POE_API_KEY` / `MINIMAX_API_KEY`），不会留在笔记本里。
 
-### 4.4 公网链接
+### 4.4 检索档位与「参数面板显隐」
+
+Colab 启动格（第 7 格）是一张表单，可以一次定好默认模型、站点、检索档位，
+并决定网页上**是否显示**「模型与检索设置」面板：
+
+| 表单项 | 默认 |
+|---|---|
+| 模型提供方 / MiniMax 站点 | `MiniMax` / `国内站 api.minimax.chat` |
+| 种子实体数 / 检索关系数 / 上下文字数上限 | `35` / `120` / `9900` |
+| **显示参数设置面板** | `False`（隐藏） |
+
+| ![参数面板](docs/shots/rag-settings.png) |
+|:--:|
+| 展开后的「模型与检索设置」——`显示参数设置面板` 取消勾选时整块隐藏，参数照常生效 |
+
+- **勾选**：使用者可自行调模型、温度、检索条数——适合内部调试。
+- **取消勾选**（默认）：面板整体隐藏，**参数仍按表单设定生效**，使用者改不到——
+  适合把公网链接发给他人使用。
+
+实现上组件照常创建并参与运算，只是 `visible=False`，所以隐藏不会改变任何行为。
+本地/服务器运行时用 `--hide-settings` 达到同样效果。
+
+### 4.5 公网链接
 
 `share=True` 会生成 72 小时有效的 `*.gradio.live` 链接。
 链接是公开的——如需限制访问，在启动格填入「访问用户名 / 访问密码」即可加一层口令。
@@ -182,9 +222,10 @@ android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk
 
 ```bash
 pip install -r rag/requirements.txt
-python rag/app.py --graph graph.json --share            # 生成公网链接
+python rag/app.py --graph graph.json --share                    # 生成公网链接
+python rag/app.py --graph graph.json --hide-settings --share   # 并隐藏参数面板
 python rag/app.py --graph graph.json --port 7860 \
-                  --user 用户名 --password 口令          # 本地/服务器带口令
+                  --user 用户名 --password 口令                  # 本地/服务器带口令
 ```
 
 `--graph` 既接受烘焙好的 `graph.json`，也直接接受原始的 `sunguangrong_kg_v2_explorer.html`

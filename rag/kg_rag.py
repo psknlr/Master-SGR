@@ -42,6 +42,12 @@ ROLE_WEIGHT = {           # 检索排序时的知识来源优先级
 
 _TOKEN_RE = re.compile(r"[一-鿿]+|[A-Za-z][A-Za-z0-9\-'.]*|\d+")
 
+# 检索默认档位（界面与笔记本的滑杆初值都取这里）
+DEFAULT_TOP_SEEDS = 35
+DEFAULT_MAX_EDGES = 120
+DEFAULT_MAX_NODES = 140
+DEFAULT_MAX_CHARS = 9900
+
 
 def tokenize(text: str):
     """中文切字符二元组，西文按词。二元组对中医专名的召回明显好过单字。"""
@@ -165,17 +171,20 @@ class Retrieval:
     TRIPLE_HEADERS = ["编号", "主语", "关系", "宾语", "原文佐证", "出处编号", "知识来源", "标记"]
 
     # -------- 送入模型的上下文 --------
-    def context(self, max_chars=6500):
+    def context(self, max_chars=DEFAULT_MAX_CHARS):
         kg = self.kg
         if not self.nodes:
             return "（图谱中未检索到与该问题直接相关的实体。）"
 
+        # 实体与关系分账，防止实体清单把关系挤掉（种子放大到 35 后尤其重要）
+        ent_budget = int(max_chars * 0.34)
         buf = ["以下是从《国医大师孙光荣中医知识图谱》检索到的知识片段，"
                f"共 {len(self.nodes)} 个实体、{len(self.edges)} 条关系。\n"]
 
         buf.append("〖实体〗")
         seed_ids = {i for i, _ in self.seeds}
-        for nid in self.nodes[:18]:
+        used = 0
+        for nid in self.nodes:
             n = kg.nodes[nid]
             mark = "★" if nid in seed_ids else "·"
             line = (f"{mark} {n['l']}"
@@ -188,8 +197,17 @@ class Retrieval:
             if n.get("a"):
                 line += "；异名 " + "、".join(n["a"][:4])
             buf.append(line)
+            used += len(line)
+            if used > ent_budget:
+                remain = len(self.nodes) - len(buf) + 2
+                if remain > 0:
+                    buf.append(f"…（另有 {remain} 个相关实体见下方关系）")
+                break
 
         buf.append("\n〖关系与原文佐证〗")
+        # "\n".join 每段还会多一个换行，末尾省略说明也要预留，一并算进来
+        used = sum(len(x) for x in buf) + len(buf)
+        TAIL = 40
         for k, (ei, _) in enumerate(self.edges, 1):
             e = kg.edges[ei]
             s, t = kg.nodes[e["s"]]["l"], kg.nodes[e["t"]]["l"]
@@ -206,86 +224,205 @@ class Retrieval:
                 seg += f"（{kg.role_zh.get(e.get('r'), e.get('r') or '')}）"
             if e.get("Q"):
                 seg += "  ⚑ 该关系未通过本体校验，仅供参考"
-            buf.append(seg)
-            if sum(len(x) for x in buf) > max_chars:
-                buf.append(f"…（其余 {len(self.edges) - k} 条关系因篇幅省略）")
+            # 先算再放，保证总字数不越过上限（越界的那条整条不要）
+            if used + len(seg) + 1 + TAIL > max_chars and k > 1:
+                buf.append(f"…（其余 {len(self.edges) - k + 1} 条关系因篇幅省略）")
                 break
+            buf.append(seg)
+            used += len(seg) + 1
 
         return "\n".join(buf)
 
     # -------- 子图 SVG（国风配色，无外部依赖） --------
-    def svg(self, width=520, height=420, theme="paper"):
+    #
+    # 标签重叠是这类图最伤可读性的问题。这里的做法是：把「圆点 + 标签」当成一个
+    # 矩形来布局，力导向收敛后再跑一遍矩形去重叠松弛（PRISM 思路），
+    # 于是标签天然不会互相压住。画布尺寸按所有矩形的总面积反推，节点多就自动变大。
+    def svg(self, width=None, height=None, theme="paper",
+            max_nodes=140, max_labels=44, scroll=True):
         kg = self.kg
-        ids = self.nodes[:46]
+        ids = self.nodes[:max_nodes]
         if not ids:
-            return "<div style='padding:28px;text-align:center;color:#7C6C58'>暂无检索结果</div>"
-        idx = {n: i for i, n in enumerate(ids)}
+            return ("<div style='padding:28px;text-align:center;color:#7C6C58'>"
+                    "暂无检索结果</div>")
+
+        idx = {nid: i for i, nid in enumerate(ids)}
+        n = len(ids)
         pairs = []
         for ei, _ in self.edges:
             e = kg.edges[ei]
-            if e["s"] in idx and e["t"] in idx:
-                pairs.append((idx[e["s"]], idx[e["t"]], kg.rel_zh.get(e["y"], e["y"])))
+            a, b = idx.get(e["s"]), idx.get(e["t"])
+            if a is not None and b is not None and a != b:
+                pairs.append((a, b, kg.rel_zh.get(e["y"], e["y"])))
 
-        bg, fg, sub = ("#F1E6D1", "#241C15", "#7C6C58") if theme == "paper" else ("#131009", "#EDE3D0", "#93866F")
-        n = len(ids)
-        rng = np.random.default_rng(7)
-        pos = np.stack([np.cos(np.arange(n) / n * 2 * np.pi), np.sin(np.arange(n) / n * 2 * np.pi)], 1)
-        pos = pos * 120 + rng.normal(0, 6, (n, 2))
-        E = np.array([[a, b] for a, b, _ in pairs], dtype=np.int32) if pairs else np.zeros((0, 2), np.int32)
+        bg, fg, sub = (("#F1E6D1", "#241C15", "#7C6C58") if theme == "paper"
+                       else ("#131009", "#EDE3D0", "#93866F"))
+        seed_ids = {i for i, _ in self.seeds}
 
-        for it in range(180):                       # 迷你力导向
+        # ---- 1. 谁配标签：种子优先，其余按关联度，给定预算 ----
+        order = sorted(range(n), key=lambda i: (ids[i] not in seed_ids,
+                                                -int(kg.degree[ids[i]])))
+        labeled = set(order[:max_labels])
+
+        # ---- 2. 每个节点的矩形（圆点 + 其下方的标签）----
+        def text_w(s, fs):
+            return sum(fs if ch > "\u2e7f" else fs * 0.56 for ch in s)
+
+        maxchars = 12 if n <= 40 else (10 if n <= 90 else 8)
+        radius = np.empty(n, dtype=np.float64)
+        halfw = np.empty(n, dtype=np.float64)
+        halfh = np.empty(n, dtype=np.float64)
+        labels, fontsz = [], np.zeros(n)
+        for i, nid in enumerate(ids):
+            is_seed = nid in seed_ids
+            deg = int(kg.degree[nid])
+            radius[i] = (7.5 if is_seed else 3.6) + min(deg ** 0.35, 3.4)
+            if i in labeled:
+                raw = kg.nodes[nid]["l"]
+                lab = raw[:maxchars] + ("…" if len(raw) > maxchars else "")
+                fs = 11.5 if is_seed else 10.0
+                labels.append(lab)
+                fontsz[i] = fs
+                halfw[i] = max(radius[i], text_w(lab, fs) / 2) + 3.5
+                halfh[i] = radius[i] + fs + 4.5
+            else:
+                labels.append("")
+                halfw[i] = radius[i] + 2.5
+                halfh[i] = radius[i] + 2.5
+
+        # ---- 3. 力导向（Fruchterman-Reingold）----
+        box_area = float((4 * halfw * halfh).sum())
+        canvas = box_area / 0.20                          # 0.20 ≈ 带标签时实际可达的填充率
+        est_w = math.sqrt(canvas * 1.35)                  # 先给力导向一个大致的场地尺度
+        rng = np.random.default_rng(11)
+        ang = np.arange(n) * 2.399963                      # 黄金角螺旋，起始分布更均匀
+        rad = np.sqrt(np.arange(n) + 0.5) * (est_w / (3.2 * math.sqrt(n)))
+        pos = np.stack([np.cos(ang) * rad, np.sin(ang) * rad], 1)
+        pos += rng.normal(0, 1.5, (n, 2))
+
+        E = (np.array([[a, b] for a, b, _ in pairs], dtype=np.int32)
+             if pairs else np.zeros((0, 2), np.int32))
+        k = math.sqrt(canvas / max(n, 1)) * 0.62
+        temp = est_w * 0.08
+        ITERS = 260
+        for it in range(ITERS):
             d = pos[:, None, :] - pos[None, :, :]
-            dist = np.hypot(d[..., 0], d[..., 1]) + 1e-6
-            rep = (d / dist[..., None]) * (2600.0 / dist[..., None] ** 2)
-            np.fill_diagonal(rep[..., 0], 0); np.fill_diagonal(rep[..., 1], 0)
-            disp = rep.sum(1)
+            dist2 = d[..., 0] ** 2 + d[..., 1] ** 2 + 1e-3
+            coef = (k * k) / dist2                          # 斥力 ~ k²/d，方向 d/|d|
+            np.fill_diagonal(coef, 0.0)
+            disp = np.einsum("ij,ijk->ik", coef, d)
             if len(E):
                 dv = pos[E[:, 1]] - pos[E[:, 0]]
-                np.add.at(disp, E[:, 0], dv * 0.045)
-                np.add.at(disp, E[:, 1], -dv * 0.045)
-            disp -= pos * 0.012
-            step = np.clip(1.0 - it / 180.0, 0.05, 1.0) * 4.0
-            norm = np.hypot(disp[:, 0], disp[:, 1])[:, None] + 1e-6
-            pos += disp / norm * np.minimum(norm, step)
+                dd = np.hypot(dv[:, 0], dv[:, 1])[:, None] + 1e-6
+                att = dv * (dd / k)                         # 引力 ~ d²/k
+                np.add.at(disp, E[:, 0], att)
+                np.add.at(disp, E[:, 1], -att)
+            disp -= pos * 0.035 * (1 + 2 * it / ITERS)       # 重力，后期收紧防飘散
+            norm = np.hypot(disp[:, 0], disp[:, 1])[:, None] + 1e-9
+            pos += disp / norm * np.minimum(norm, temp)
+            temp *= 0.985
 
-        lo, hi = pos.min(0), pos.max(0)
+        # ---- 4. 定画布：让长宽比贴合版面实际形状，避免一侧大片留白 ----
+        pad = 10.0
+        legend_h = 46                            # 底部图例条，单独占用不与节点争位
+        lo = (pos - np.stack([halfw, halfh], 1)).min(0)
+        hi = (pos + np.stack([halfw, halfh], 1)).max(0)
         span = np.maximum(hi - lo, 1e-6)
-        pad = 40
-        pos = (pos - lo) / span * np.array([width - 2 * pad, height - 2 * pad]) + pad
+        if width is None:
+            ar = float(np.clip(span[0] / span[1], 0.85, 2.0))
+            width = int(np.clip(math.sqrt(canvas * ar), 520, 1380))
+        if height is None:
+            height = int(np.clip(canvas / max(width, 1), 340, 1100)) + legend_h
+        plot_h = height - legend_h
 
-        seed_ids = {i for i, _ in self.seeds}
-        out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
-               f'style="width:100%;height:auto;background:{bg};border-radius:4px">']
-        out.append(f'<g stroke="{sub}" stroke-opacity="0.42" stroke-width="1">')
+        # ---- 5. 归一到画布并居中 ----
+        scale = min((width - 2 * pad) / span[0], (plot_h - 2 * pad) / span[1])
+        pos = (pos - lo) * scale
+        pos[:, 0] += (width - span[0] * scale) / 2
+        pos[:, 1] += (plot_h - span[1] * scale) / 2
+        # 盒子不随位置缩放（字号是固定的），所以缩小后要靠松弛重新腾地方
+
+        # ---- 6. 矩形去重叠松弛：标签不再互相压住的关键 ----
+        for it in range(180):
+            dx = pos[:, 0][:, None] - pos[:, 0][None, :]
+            dy = pos[:, 1][:, None] - pos[:, 1][None, :]
+            ox = (halfw[:, None] + halfw[None, :]) - np.abs(dx)
+            oy = (halfh[:, None] + halfh[None, :]) - np.abs(dy)
+            hit = (ox > 0) & (oy > 0)
+            np.fill_diagonal(hit, False)
+            if not hit.any():
+                break
+            sx = np.where(dx >= 0, 1.0, -1.0)
+            sy = np.where(dy >= 0, 1.0, -1.0)
+            along_x = hit & (ox <= oy)                       # 沿穿透较浅的轴推开
+            along_y = hit & (ox > oy)
+            push = np.stack([
+                np.where(along_x, sx * ox * 0.5, 0.0).sum(1),
+                np.where(along_y, sy * oy * 0.5, 0.0).sum(1),
+            ], 1)
+            pos += push * 0.55
+            np.clip(pos[:, 0], halfw + pad * 0.4, width - halfw - pad * 0.4, out=pos[:, 0])
+            np.clip(pos[:, 1], halfh + pad * 0.4, plot_h - halfh - pad * 0.4, out=pos[:, 1])
+        # 提前收敛跳出循环时也要保证在界内
+        np.clip(pos[:, 0], halfw + pad * 0.4, width - halfw - pad * 0.4, out=pos[:, 0])
+        np.clip(pos[:, 1], halfh + pad * 0.4, plot_h - halfh - pad * 0.4, out=pos[:, 1])
+
+        # ---- 7. 出图 ----
+        out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" '
+               'viewBox="0 0 %d %d" style="background:%s;border-radius:4px;display:block">'
+               % (width, height, width, height, bg)]
+
+        out.append('<g stroke="%s" stroke-opacity="0.34" stroke-width="1" fill="none">' % sub)
         for a, b, rel in pairs:
-            out.append(f'<line x1="{pos[a,0]:.1f}" y1="{pos[a,1]:.1f}" '
-                       f'x2="{pos[b,0]:.1f}" y2="{pos[b,1]:.1f}"><title>{html.escape(rel)}</title></line>')
+            out.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f"><title>%s</title></line>'
+                       % (pos[a, 0], pos[a, 1], pos[b, 0], pos[b, 1], html.escape(rel)))
         out.append("</g>")
-        for nid in ids:
-            i = idx[nid]
+
+        for i, nid in enumerate(ids):
             nd = kg.nodes[nid]
             is_seed = nid in seed_ids
-            r = 8.5 if is_seed else 4.5
             col = ROLE_COLOR.get(nd["r"], "#7E6F5C")
-            out.append(f'<circle cx="{pos[i,0]:.1f}" cy="{pos[i,1]:.1f}" r="{r}" fill="{col}"'
-                       + (f' stroke="{bg}" stroke-width="2.4"' if is_seed else "")
-                       + f'><title>{html.escape(nd["l"])}</title></circle>')
-            if is_seed or n <= 22:
-                lab = nd["l"][:9] + ("…" if len(nd["l"]) > 9 else "")
-                weight = ' font-weight="600"' if is_seed else ""
-                fs = 11 if is_seed else 9.5
-                # 中日韩字符约等于一个字号宽，西文约半个；据此估宽，越界就改成右对齐画到左边
-                est = sum(fs if ch > "\u2e7f" else fs * 0.55 for ch in lab)
-                tx, anchor = pos[i, 0] + r + 3, "start"
-                if tx + est > width - 4:
-                    tx, anchor = pos[i, 0] - r - 3, "end"
-                    if tx - est < 4:            # 两边都放不下就居中压在节点上方
-                        tx, anchor = min(max(pos[i, 0], est / 2 + 4), width - est / 2 - 4), "middle"
-                out.append('<text x="%.1f" y="%.1f" font-size="%s" fill="%s" text-anchor="%s" '
-                           'font-family="Noto Serif CJK SC,Songti SC,serif"%s>%s</text>'
-                           % (tx, pos[i, 1] + 3.5, fs, fg, anchor, weight, html.escape(lab)))
-        out.append("</svg>")
-        return "".join(out)
+            out.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"%s><title>%s</title></circle>'
+                       % (pos[i, 0], pos[i, 1], radius[i], col,
+                          ' stroke="%s" stroke-width="2.2"' % bg if is_seed else "",
+                          html.escape("%s（%s · %s）" % (
+                              nd["l"], kg.type_zh.get(nd["t"], nd["t"]),
+                              kg.role_zh.get(nd["r"], nd["r"])))))
+
+        # 标签统一画在圆点正下方，配同背景色描边做「光晕」，压住穿过的连线
+        for i in range(n):
+            if not labels[i]:
+                continue
+            fs = fontsz[i]
+            out.append('<text x="%.1f" y="%.1f" font-size="%.1f" fill="%s" text-anchor="middle" '
+                       'stroke="%s" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round" '
+                       'font-family="Noto Serif CJK SC,Songti SC,serif"%s>%s</text>'
+                       % (pos[i, 0], pos[i, 1] + radius[i] + fs + 0.5, fs, fg, bg,
+                          ' font-weight="600"' if ids[i] in seed_ids else "",
+                          html.escape(labels[i])))
+
+        # 图例
+        legend = [("sun_original", "孙光荣原创"), ("sun_compiled", "孙光荣编纂"),
+                  ("classical_source", "经典引文"), ("third_party_clinical", "他人临床报道"),
+                  ("general_tcm", "中医通识")]
+        lx, ly = 10, plot_h + 20
+        out.append('<g font-size="10" font-family="Noto Sans CJK SC,sans-serif" fill="%s" '
+                   'opacity="0.88">' % sub)
+        cx = lx + 4
+        for rk, zh in legend:
+            out.append('<circle cx="%.1f" cy="%.1f" r="4" fill="%s"/>' % (cx, ly, ROLE_COLOR[rk]))
+            out.append('<text x="%.1f" y="%.1f">%s</text>' % (cx + 9, ly + 3.5, zh))
+            cx += 9 + len(zh) * 10 + 20
+        out.append('<text x="%d" y="%.1f" font-style="italic">● 描边者为检索种子　共 %d 实体 / %d 关系</text>'
+                   % (lx, plot_h + 12, n, len(pairs)))
+        out.append("</g></svg>")
+
+        svg = "".join(out)
+        if scroll:
+            svg = ("<div style='overflow:auto;max-width:100%;max-height:560px;"
+                   "border:1px solid rgba(36,28,21,.15);border-radius:4px'>" + svg + "</div>")
+        return svg
+
 
 
 class KGRag:
@@ -351,8 +488,8 @@ class KGRag:
                   f"{len(self.docs)} 部文献 · {len(self.type_zh)} 类实体 · {len(self.rel_zh)} 类关系")
 
     # ------------------------------------------------------------------ 检索
-    def retrieve(self, query, focus_entities=(), top_seeds=8, max_edges=48,
-                 max_nodes=46) -> Retrieval:
+    def retrieve(self, query, focus_entities=(), top_seeds=DEFAULT_TOP_SEEDS,
+                 max_edges=DEFAULT_MAX_EDGES, max_nodes=DEFAULT_MAX_NODES) -> Retrieval:
         q_text = query if not focus_entities else query + " " + " ".join(focus_entities)
         toks = tokenize(q_text)
 

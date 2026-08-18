@@ -31,6 +31,51 @@ def writefile(name, path):
     return code(f"%%writefile {name}\n" + read(path))
 
 
+LAUNCH_CELL = r"""#@title 启动 Gradio（生成公网链接） { display-mode: "form" }
+#@markdown ### 默认模型
+模型提供方 = "MiniMax"  #@param ["MiniMax", "Poe"]
+MiniMax模型 = "MiniMax-M3"  #@param {type:"string"}
+MiniMax站点 = "国内站 api.minimax.chat"  #@param ["国内站 api.minimax.chat", "国际站 api.minimaxi.chat"]
+MiniMax_GroupId = ""  #@param {type:"string"}
+Poe模型 = "claude-sonnet-5"  #@param {type:"string"}
+温度 = 0.3  #@param {type:"slider", min:0, max:1, step:0.05}
+
+#@markdown ### 默认检索档位
+种子实体数 = 35   #@param {type:"slider", min:3, max:60, step:1}
+检索关系数 = 120  #@param {type:"slider", min:12, max:300, step:4}
+上下文字数上限 = 9900  #@param {type:"slider", min:2000, max:20000, step:100}
+
+#@markdown ### 界面
+#@markdown 取消勾选则**隐藏**网页上的「模型与检索设置」面板 ——
+#@markdown 参数仍按上面设定生效，只是使用者改不了。
+显示参数设置面板 = False  #@param {type:"boolean"}
+访问用户名 = ""  #@param {type:"string"}
+访问密码 = ""    #@param {type:"string"}
+
+import importlib
+import app as sgr_app
+importlib.reload(sgr_app)
+
+demo = sgr_app.build_demo(
+    kg, share_note=" · Colab 在线版",
+    show_settings=显示参数设置面板,
+    defaults=dict(provider=模型提供方, mm_model=MiniMax模型, mm_site=MiniMax站点,
+                  mm_group=MiniMax_GroupId, poe_model=Poe模型, temperature=温度,
+                  top_seeds=种子实体数, max_edges=检索关系数, max_ctx=上下文字数上限),
+)
+auth = (访问用户名, 访问密码) if (访问用户名 and 访问密码) else None
+
+res = sgr_app.launch(demo, share=True, port=7860, auth=auth)
+try:
+    print("公网链接：", res[2] or "(未生成，请检查 Colab 网络)")
+    print("本地链接：", res[1])
+except Exception:
+    pass
+
+print("参数设置面板：", "显示" if 显示参数设置面板 else "已隐藏")
+print("停止服务：demo.close()")
+"""
+
 cells = []
 
 cells.append(md(f"""# 国医大师孙光荣中医知识图谱 · RAG 智能问答
@@ -46,7 +91,8 @@ cells.append(md(f"""# 国医大师孙光荣中医知识图谱 · RAG 智能问�
 |---|---|
 | 知识底座 | 19,343 实体 · 25,713 关系 · 8 部文献 · 31 类实体 · 44 类关系 |
 | 检索 | 实体索引 + 原文佐证索引双路召回 → 1 跳图扩展 → 关系类型轮转采样 |
-| 生成 | **Poe**（默认 `claude-sonnet-5`）或 **MiniMax**（默认 `MiniMax-M3`） |
+| 生成 | **MiniMax**（默认 `MiniMax-M3`，国内站）或 **Poe**（默认 `claude-sonnet-5`） |
+| 默认检索档位 | 种子实体 35 · 关系 120 · 上下文 9,900 字（可在启动格改，也可整体隐藏面板） |
 | 可核验 | 右侧面板实时展示本轮实际检索到的子图 / 实体 / 三元组 / 原文佐证 / 送入模型的上下文 |
 
 **依次运行下面每个单元格即可**（约 2 分钟）。第 6 格是「RAG 知识图谱数据」预览，
@@ -136,9 +182,9 @@ cells.append(md("""## 5　RAG 知识图谱数据预览　🔍
 （同样的内容也会实时出现在第 8 格问答界面的右侧面板里。）"""))
 cells.append(code('''#@title RAG 检索到的知识图谱数据 { display-mode: "form" }
 问题 = "什么是中和思想？中和组方的基本原则是什么？"  #@param {type:"string"}
-种子实体数 = 8   #@param {type:"slider", min:3, max:16, step:1}
-检索关系数 = 48  #@param {type:"slider", min:12, max:90, step:2}
-上下文字数上限 = 6500  #@param {type:"slider", min:2000, max:14000, step:500}
+种子实体数 = 35   #@param {type:"slider", min:3, max:60, step:1}
+检索关系数 = 120  #@param {type:"slider", min:12, max:300, step:4}
+上下文字数上限 = 9900  #@param {type:"slider", min:2000, max:20000, step:100}
 
 import pandas as pd
 from IPython.display import HTML, display
@@ -153,7 +199,7 @@ display(HTML(
     f"种子实体 {len(r.seeds)} · 子图实体 {len(r.nodes)} · 关系 {len(r.edges)} · "
     f"上下文 {len(ctx)} 字</div>"))
 
-display(HTML("<h4>① 检索子图</h4>" + r.svg(width=880, height=470)))
+display(HTML("<h4>① 检索子图</h4>" + r.svg()))   # 画布尺寸随实体数自适应
 
 df_t = pd.DataFrame(r.triple_rows(), columns=r.TRIPLE_HEADERS)
 df_e = pd.DataFrame(r.entity_rows(), columns=r.ENTITY_HEADERS)
@@ -177,8 +223,8 @@ cells.append(md("""## 6　配置模型 API
 
 | | 默认模型 | 密钥获取 |
 |---|---|---|
+| **MiniMax**（默认） | `MiniMax-M3`　国内站 `api.minimax.chat` | MiniMax 开放平台 → 账户管理 → 接口密钥 |
 | **Poe** | `claude-sonnet-5` | <https://poe.com/api_key> |
-| **MiniMax** | `MiniMax-M3` | MiniMax 开放平台 → 账户管理 → 接口密钥 |
 
 推荐把密钥存进 Colab 左侧 🔑 **Secrets**（名字用 `POE_API_KEY` / `MINIMAX_API_KEY`），
 这样密钥不会留在笔记本里。没存 Secrets 时会提示手动输入，直接回车可跳过。
@@ -241,25 +287,7 @@ cells.append(md("""## 7　启动问答服务，生成公网链接　🌐
 
 - 想给链接加口令：把 `访问用户名` / `访问密码` 填上。
 - 想长期在线：把 `rag/` 目录部署到 Hugging Face Spaces 或自己的服务器（见仓库 README）。"""))
-cells.append(code('''#@title 启动 Gradio（生成公网链接） { display-mode: "form" }
-访问用户名 = ""  #@param {type:"string"}
-访问密码 = ""    #@param {type:"string"}
-
-import importlib
-import app as sgr_app
-importlib.reload(sgr_app)
-
-demo = sgr_app.build_demo(kg, share_note=" · Colab 在线版")
-auth = (访问用户名, 访问密码) if (访问用户名 and 访问密码) else None
-
-res = sgr_app.launch(demo, share=True, port=7860, auth=auth)
-try:
-    print("\\n公网链接：", res[2] or "(未生成，请检查 Colab 网络)")
-    print("本地链接：", res[1])
-except Exception:
-    pass
-
-print("\n停止服务：demo.close()")'''))
+cells.append(code(LAUNCH_CELL))
 
 cells.append(md("""---
 

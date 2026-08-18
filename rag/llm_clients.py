@@ -136,12 +136,12 @@ class PoeClient:
 
 
 class MiniMaxClient:
-    """MiniMax chatcompletion_v2。默认国际站，可切国内站。"""
+    """MiniMax chatcompletion_v2。默认国内站，可切国际站。"""
 
     name = "MiniMax"
 
     def __init__(self, api_key: str, model: str = DEFAULT_MINIMAX_MODEL,
-                 base_url: str = MINIMAX_BASE_INTL, group_id: str = "", timeout: int = 180):
+                 base_url: str = MINIMAX_BASE_CN, group_id: str = "", timeout: int = 180):
         self.api_key = (api_key or "").strip()
         self.model = model or DEFAULT_MINIMAX_MODEL
         self.base_url = base_url.rstrip("/")
