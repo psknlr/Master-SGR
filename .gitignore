@@ -1,0 +1,8 @@
+# 构建中间产物
+tools/build/
+android/out/work/
+android/out/*.idsig
+
+# 本地 SDK / 依赖
+android-sdk/
+node_modules/

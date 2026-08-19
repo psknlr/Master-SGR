@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 「中」字朱印 · cinnabar seal bearing the character 中 (the core of 中和) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+
+    <!-- 印面 -->
+    <path
+        android:fillColor="#A8322A"
+        android:pathData="M32,22 L76,22 A10,10 0 0 1 86,32 L86,76 A10,10 0 0 1 76,86 L32,86 A10,10 0 0 1 22,76 L22,32 A10,10 0 0 1 32,22 Z"/>
+
+    <!-- 中 · 竖 -->
+    <path
+        android:fillColor="#FBF3E4"
+        android:pathData="M50.5,29 L57.5,29 L57.5,81 L50.5,81 Z"/>
+
+    <!-- 中 · 口 -->
+    <path
+        android:fillColor="#FBF3E4"
+        android:fillType="evenOdd"
+        android:pathData="M37,40 L71,40 L71,72 L37,72 Z M43.5,46.5 L64.5,46.5 L64.5,65.5 L43.5,65.5 Z"/>
+</vector>

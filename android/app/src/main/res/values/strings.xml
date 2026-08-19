@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">孙光荣中医知识图谱</string>
+    <string name="press_again_exit">再按一次退出</string>
+    <string name="cannot_open_link">无法打开该链接</string>
+    <string name="share_title">分享</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 宣纸底色的启动主题：冷启动瞬间即见「中和」朱印，不会白屏一闪 -->
+    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:colorBackground">@color/paper</item>
+        <item name="android:statusBarColor">@color/paper_dark</item>
+        <item name="android:navigationBarColor">@color/paper</item>
+        <item name="android:windowDisablePreview">false</item>
+    </style>
+</resources>
