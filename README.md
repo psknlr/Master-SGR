@@ -9,9 +9,10 @@
 把原本只能在桌面浏览器里打开的 `sunguangrong_kg_v2_explorer.html`（7 MB 单文件），
 重制为两件东西：
 
-1. 一款**国风、离线、可签名安装**的 Android 应用（APK）；
-2. 一份 **Colab 笔记本**——基于同一套图谱做**检索增强（GraphRAG）智能问答**，
-   接 MiniMax 或 Poe，一键生成**公网多轮对话链接**。
+1. 一款**国风、可签名安装**的 Android 应用（APK）——图谱浏览完全离线，
+   **v2.0 起内置「问道」GraphRAG 问答**：检索在手机上完成，只有生成一步调用 MiniMax / Poe；
+2. 一份 **Colab 笔记本**——同一套图谱与同一套检索算法，
+   一键生成**公网多轮对话链接**，附独立的 RAG 数据预览单元格。
 
 | | | |
 |:--:|:--:|:--:|
@@ -19,6 +20,8 @@
 | 卷首 · 大师小传与总览 | 观图 · 19,343 实体星图 | 详情 · 关系与原文佐证 |
 | ![聚焦](docs/shots/focus.png) | ![检索](docs/shots/search.png) | ![夜读](docs/shots/night.png) |
 | 聚焦 · 自我中心网络 | 检索 · 中英文与异名 | 夜读配色 |
+| ![问道](docs/shots/chat-answer.png) | ![依据子图](docs/shots/chat-evidence.png) | ![问道设置](docs/shots/chat-settings.png) |
+| **问道** · 引文可点回图谱 | 依据 · 本轮检索到的子图 | 问道设置 · MiniMax / Poe |
 
 ---
 
@@ -40,24 +43,27 @@
 ## 一、安装包
 
 ```
-android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk
+android/out/SunGuangrong-TCM-KnowledgeGraph-v2.0.0.apk     ← 当前版本（含「问道」问答）
+android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk     ← 纯离线浏览版
 ```
 
 | 项目 | 值 |
 |---|---|
 | 应用名 | 孙光荣中医知识图谱 |
 | 包名 | `cn.impfai.sgrkg` |
-| 版本 | 1.0.0（versionCode 1） |
-| 体积 | 1.42 MB |
+| 版本 | **2.0.0**（versionCode 2）；同一密钥签名，可直接覆盖安装 1.0.0 |
+| 体积 | 1.5 MB |
 | 系统要求 | Android 5.0（API 21）及以上，targetSdk 34 |
 | 签名 | 自带 4096 位 RSA 密钥，v1 + v2 + v3 三重签名 |
-| 数据 | 全部内置，**首次打开即可离线使用**，不上传任何数据 |
+| 数据 | 图谱全部内置，浏览与检索**完全离线**，不上传任何数据 |
 
 **安装方法**：把 APK 传到手机 → 允许「安装未知来源应用」→ 点击安装。
 
-> 应用声明了 `INTERNET` 权限，这是 WebView 以 `https://appassets.androidplatform.net`
-> 虚拟域名装载 APK 内置资源所必需的。所有非本地请求在
-> `MainActivity.serve()` 中被直接返回 403，应用不会访问任何外部服务器。
+> **联网说明**：图谱浏览、检索、聚焦以及「问道」的**检索阶段**都在本机完成。
+> 只有「问道」的**生成阶段**会把检索到的图谱证据连同你的问题发给你在设置里选择的
+> MiniMax 或 Poe 服务；应用不会访问其它任何服务器——原生层 `LlmClient` 的主机白名单
+> 只放行 `api.minimax.chat` / `api.minimaxi.chat` / `api.poe.com`，
+> WebView 层则继续对所有外部地址返回 403。没有填密钥时，「问道」仍会给出图谱证据，只是不生成回答。
 
 ---
 
@@ -74,9 +80,10 @@ android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk
 |---|---|
 | **卷首** | 大师小传、数据总览、知识来源分布、四个快捷入口（观图 / 检索 / 典籍 / 随缘）、研发团队 |
 | **观图** | 19,343 实体 × 25,713 关系的可平移缩放星图 |
+| **问道** | 端上 GraphRAG 问答（v2.0 新增）：多轮对话，回答附「依据」面板，引文编号可点回图谱 |
 | **检索** | 中文 / English / 异名全文检索，可按来源或实体类型（31 类）过滤 |
 | **典籍** | 八部文献（点击可单看某一部）、31 类实体、44 类关系本体 |
-| **关于** | 研发团队、图谱说明、抽样审校精度、使用提示、免责声明 |
+| **关于** | 研发团队、图谱说明、抽样审校精度、使用提示、免责声明（从卷首进入） |
 
 ### 3. 图谱交互
 - 单指拖动平移，双指捏合缩放，**双击**快速放大。
@@ -87,7 +94,26 @@ android/out/SunGuangrong-TCM-KnowledgeGraph-v1.0.0.apk
 - **筛选**：按知识来源 / 文献 / 实体类型任意组合，实时更新可见实体与关系计数。
 - 未通过本体 domain/range 校验的关系标注 **⚑ 待审**，不作定论。
 
-### 4. 性能
+### 4. 问道（v2.0）
+
+「问道」把 Colab 那套 GraphRAG 完整搬进了手机，**检索引擎是同一套算法的 JavaScript 移植**
+（`assets/web/js/rag.js`，与 Python 版逐题比对 Jaccard 0.92–1.00）：
+
+- **索引在本机建**：图谱装载后趁空闲分片构建（每片 ≤ 24 ms，不卡界面），约 2–3 秒就绪；
+  单次检索 5–25 ms。
+- **先给证据，再等模型**：提问后「依据」面板立刻出现——本轮命中的实体、关系与原文佐证——
+  模型回答随后流式写入。密钥没填也能用这一半。
+- **每条都能点回图谱**：回答里的 `[R3]` 是可点的引文编号，点了滚到对应关系；
+  关系两端的实体、子图里的圆点，点了都打开图谱详情抽屉；反过来在任何实体的详情里也有「问 AI」。
+- **子图布局同 Colab 版**：矩形去重叠松弛，标签不互压；按屏宽定版、纵向可滚。
+- **多轮**：保留近 4 轮对话，并把上一轮的核心实体带入下一轮检索做指代消解；对话本机持久化。
+- **模型**：默认 MiniMax（`MiniMax-M3`，国内站），可切 Poe（`claude-sonnet-5`，未上架时自动退到
+  同族最新版）。设置里有「连通性自检」。
+- **原生桥**：生成请求由 Java 层 `LlmClient` 代发（`HttpURLConnection` + SSE），增量按 40 ms 合批
+  回送 WebView；WebView 自身仍不能外联。`LlmClient` 不依赖 Android 类，配了 17 项桌面单元测试
+  （含两家接口的真实鉴权失败路径）。
+
+### 5. 性能
 原版把 7 MB 数据直接内联在 HTML 里，并在**每次打开时**在浏览器里跑 190 轮力导向迭代。
 本版把这些工作全部搬到了构建期：
 
@@ -296,6 +322,7 @@ sunguangrong_kg_v2_explorer.html      原始桌面版（保留，作为数据源
 tools/
   layout.mjs                          离线布局预计算（ForceAtlas2 + Barnes-Hut）
   shoot.mjs                           无头浏览器逐屏截图 / 报错检查
+  shoot_chat.mjs                      问道页面验证（NativeApp 桩模拟 Java 流式桥）
   icons.mjs                           生成传统 PNG 启动图标
   make_notebook.py                    由 rag/*.py 生成 Colab 笔记本（单一真源）
 rag/
@@ -311,10 +338,14 @@ android/
   out/*.apk                           产物
   app/src/main/
     AndroidManifest.xml
-    java/cn/impfai/sgrkg/MainActivity.java   WebView 宿主 + assets 拦截 + 返回键
+    java/cn/impfai/sgrkg/MainActivity.java   WebView 宿主 + assets 拦截 + 返回键 + LLM 桥
+    java/cn/impfai/sgrkg/LlmClient.java      Poe / MiniMax 流式客户端（纯 Java，主机白名单）
     res/                              图标、启动图、主题
     assets/web/                       离线 Web 应用
-      index.html  css/app.css  js/app.js
+      index.html  css/app.css
+      js/app.js                       图谱浏览
+      js/rag.js                       端上 GraphRAG 检索（kg_rag.py 的 JS 移植）
+      js/chat.js                      问道界面、设置、原生桥
       data/graph.json                 已烘焙坐标的图谱数据（6.7 MB）
 ```
 

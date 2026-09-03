@@ -9,7 +9,8 @@ package cn.impfai.sgrkg;
  * 说明：图谱本体是一套自带的离线 Web 应用（assets/web），本类只做三件事——
  *   1. 用一个受控的虚拟域名把 assets 里的文件喂给 WebView（保证同源，XHR 可用）；
  *   2. 把 Android 的返回键、系统栏配色和 Web 层打通；
- *   3. 全程禁止任何对外网络访问，做到纯离线。
+ *   3. WebView 层禁止任何对外网络访问；「问道」的模型调用由原生 LlmClient 代发，
+ *      主机白名单只放行 Poe / MiniMax 官方接口。
  */
 
 import android.annotation.SuppressLint;
@@ -33,10 +34,18 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import android.os.Handler;
+import android.os.Looper;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends Activity {
 
@@ -47,6 +56,11 @@ public class MainActivity extends Activity {
 
     private WebView web;
     private long lastBackAt = 0L;
+
+    /* 问道：原生侧的 LLM 请求池。WebView 层禁止外联，只有这里能出网，且主机受白名单约束。 */
+    private final ExecutorService llmPool = Executors.newFixedThreadPool(2);
+    private final Map<String, LlmClient> llmActive = new ConcurrentHashMap<String, LlmClient>();
+    private final Handler main = new Handler(Looper.getMainLooper());
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     @Override
@@ -203,6 +217,56 @@ public class MainActivity extends Activity {
         @JavascriptInterface
         public void ready() { /* 图谱装载完成，占位以便后续扩展 */ }
 
+        /* ---- 问道：流式对话 ---- */
+        @JavascriptInterface
+        public void llmStart(final String reqId, final String cfgJson) {
+            final LlmClient client = new LlmClient();
+            llmActive.put(reqId, client);
+            llmPool.execute(new Runnable() {
+                @Override public void run() {
+                    JSONObject cfg;
+                    try { cfg = new JSONObject(cfgJson); }
+                    catch (Exception e) { emit(reqId, "error", "请求参数无效"); llmActive.remove(reqId); return; }
+                    client.streamChat(cfg, new LlmClient.Listener() {
+                        // 增量按 ~40ms 合批，避免每个 token 都跨进程刷一次 WebView
+                        private final StringBuilder buf = new StringBuilder();
+                        private boolean scheduled = false;
+                        private final Runnable flush = new Runnable() {
+                            @Override public void run() {
+                                String s; synchronized (buf) { s = buf.toString(); buf.setLength(0); scheduled = false; }
+                                if (!s.isEmpty()) emitNow(reqId, "chunk", s);
+                            }
+                        };
+                        @Override public void onChunk(String text) {
+                            synchronized (buf) { buf.append(text); if (scheduled) return; scheduled = true; }
+                            main.postDelayed(flush, 40);
+                        }
+                        @Override public void onDone() { main.post(flush); emit(reqId, "done", ""); llmActive.remove(reqId); }
+                        @Override public void onError(String m) { main.post(flush); emit(reqId, "error", m); llmActive.remove(reqId); }
+                    });
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void llmCancel(String reqId) {
+            LlmClient c = llmActive.remove(reqId);
+            if (c != null) c.cancel();
+        }
+
+        /* ---- 问道：受白名单约束的 GET（读取 Poe 公开模型目录） ---- */
+        @JavascriptInterface
+        public void httpGet(final String reqId, final String url) {
+            llmPool.execute(new Runnable() {
+                @Override public void run() {
+                    String[] r = LlmClient.httpGet(url);
+                    JSONObject o = new JSONObject();
+                    try { o.put("status", Integer.parseInt(r[0])); o.put("body", r[1]); } catch (Exception ignored) { }
+                    emit(reqId, "http", o.toString());
+                }
+            });
+        }
+
         @JavascriptInterface
         public void share(final String text) {
             runOnUiThread(new Runnable() {
@@ -214,6 +278,16 @@ public class MainActivity extends Activity {
                 }
             });
         }
+    }
+
+    /** 把事件送回 Web 层：window.__llmEvent(id, type, payload)。字符串用 JSONObject.quote 安全转义。 */
+    private void emit(final String id, final String type, final String payload) {
+        main.post(new Runnable() { @Override public void run() { emitNow(id, type, payload); } });
+    }
+    private void emitNow(String id, String type, String payload) {
+        if (web == null) return;
+        web.evaluateJavascript("window.__llmEvent&&__llmEvent(" + JSONObject.quote(id) + ","
+                + JSONObject.quote(type) + "," + JSONObject.quote(payload == null ? "" : payload) + ")", null);
     }
 
     /* ------------------------------------------------------------------ */
@@ -270,6 +344,9 @@ public class MainActivity extends Activity {
     @Override protected void onPause()   { super.onPause();   if (web != null) web.onPause(); }
     @Override protected void onResume()  { super.onResume();  if (web != null) web.onResume(); }
     @Override protected void onDestroy() {
+        for (LlmClient c : llmActive.values()) c.cancel();
+        llmActive.clear();
+        llmPool.shutdownNow();
         if (web != null) { web.destroy(); web = null; }
         super.onDestroy();
     }

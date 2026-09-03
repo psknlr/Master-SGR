@@ -751,6 +751,7 @@ function openSheet(i, pushHist) {
     '<div class="sh-acts">' +
       '<button id="sh-focus" class="hi">聚 焦</button>' +
       '<button id="sh-locate">图中定位</button>' +
+      '<button id="sh-ask">问 AI</button>' +
       (S.hist.length > 1 ? '<button id="sh-back">返 回</button>' : '') +
     '</div>';
 
@@ -808,6 +809,7 @@ function openSheet(i, pushHist) {
 
   $('#sh-focus').onclick = () => { closeSheet(); go('graph'); enterFocus(i); };
   $('#sh-locate').onclick = () => { closeSheet(); go('graph'); if (S.focus) exitFocus(); GR.centerOn(i, Math.max(GR.scale, 3.2)); };
+  $('#sh-ask').onclick = () => { closeSheet(); if (window.CHAT) CHAT.ask('请依据图谱介绍「' + nd.l + '」：它是什么，与哪些实体相关，孙光荣对此有何论述？'); };
   const bk = $('#sh-back');
   if (bk) bk.onclick = () => { S.hist.pop(); const prev = S.hist[S.hist.length - 1]; if (prev != null) openSheet(prev, false); };
 
@@ -1041,7 +1043,7 @@ function syncFilterUI() { initFilters(); }
 /* =========================================================================
    9. 导航
    ========================================================================= */
-const VIEWS = { home: '#v-home', graph: '#v-graph', search: '#v-search', lib: '#v-lib', about: '#v-about' };
+const VIEWS = { home: '#v-home', graph: '#v-graph', chat: '#v-chat', search: '#v-search', lib: '#v-lib', about: '#v-about' };
 
 function go(v) {
   if (!VIEWS[v]) return;
@@ -1050,6 +1052,7 @@ function go(v) {
   $$('#nav .tab').forEach(t => t.classList.toggle('on', t.dataset.go === v));
   if (v === 'graph') { GR.resize(); GR.request(); }
   if (v === 'search') setTimeout(() => { if (!$('#q-res').children.length) runSearch(); }, 0);
+  if (v === 'chat' && window.CHAT) CHAT.onEnter();
 }
 
 function closeOverlays() {
@@ -1060,6 +1063,7 @@ function closeOverlays() {
 
 /* Android 返回键 */
 window.__appBack = function () {
+  if (window.CHAT && CHAT.back()) return true;
   if (closeOverlays()) return true;
   if ($('#sheet').classList.contains('on')) { closeSheet(); return true; }
   if (S.focus) { exitFocus(); return true; }
@@ -1074,7 +1078,7 @@ function setTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
   try { localStorage.setItem('sgr-theme', t); } catch (e) {}
   readTheme();
-  if (S.D) { GR.invalidateBase(); GR.request(); renderRoleLegend(); initSearch(); }
+  if (S.D) { GR.invalidateBase(); GR.request(); renderRoleLegend(); initSearch(); if (window.CHAT) CHAT.onTheme(); }
   if (window.NativeApp && NativeApp.setTheme) { try { NativeApp.setTheme(t); } catch (e) {} }
 }
 
@@ -1157,6 +1161,7 @@ function boot() {
     GR.fit(false, 0.93);      // 初次进入：框住中心密集区
     GR.draw();
     $('#loading').style.display = 'none';
+    if (window.CHAT) { CHAT.init(); CHAT.warm(); }
     if (window.NativeApp && NativeApp.ready) { try { NativeApp.ready(); } catch (e) {} }
   }).catch(err => {
     $('#load-msg').innerHTML = '图谱数据装载失败<br><span style="font-size:10px">' + esc(String(err && err.message || err)) + '</span>';

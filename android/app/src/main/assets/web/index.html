@@ -54,9 +54,17 @@
         <i><svg viewBox="0 0 24 24"><path d="M4 5.5h7v14H4zM13 5.5h7v14h-7zM6.5 9h2M15.5 9h2"/></svg></i>
         <span><u>典籍</u><small>LIBRARY</small></span>
       </button>
+      <button class="entry" data-go="chat">
+        <i><svg viewBox="0 0 24 24"><path d="M4 6.5h16v10H9l-4 3.5v-3.5H4z"/><path d="M8 10.5h8M8 13.5h5"/></svg></i>
+        <span><u>问道</u><small>ASK · AI</small></span>
+      </button>
       <button class="entry" id="e-random">
         <i><svg viewBox="0 0 24 24"><path d="M4 7h4l8 10h4M4 17h4l3-3.8M16 7h4M18 5l2 2-2 2M18 15l2 2-2 2"/></svg></i>
         <span><u>随缘</u><small>RANDOM</small></span>
+      </button>
+      <button class="entry" data-go="about">
+        <i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 11v5.5M12 8.2v.2"/></svg></i>
+        <span><u>关于</u><small>ABOUT</small></span>
       </button>
     </div>
 
@@ -74,7 +82,7 @@
 
     <div class="divider"><span>医道中和</span></div>
 
-    <div class="team">
+    <div class="team press" data-go="about" style="cursor:pointer">
       <div class="lbl">研发团队</div>
       <div class="a">孙光荣大师弟子 <b>田建辉</b> 团队</div>
       <div class="amp">联 合 研 发</div>
@@ -132,6 +140,26 @@
         <p id="load-msg">正 在 展 卷</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= 问道 CHAT ================= -->
+<section class="view flat" id="v-chat">
+  <div class="chat-top">
+    <span class="seal sm">问道</span>
+    <h2>图谱问答 <small>依图谱证据作答 · 可核验</small></h2>
+    <span id="chat-idx" hidden></span>
+    <div class="chat-tools">
+      <button class="iconbtn" id="chat-clear" aria-label="清空" style="width:34px;height:34px;box-shadow:none">
+        <svg viewBox="0 0 24 24"><path d="M5 7h14M9 7V5h6v2M8 7l1 12h6l1-12"/></svg></button>
+      <button class="iconbtn" id="chat-settings" aria-label="设置" style="width:34px;height:34px;box-shadow:none">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/></svg></button>
+    </div>
+  </div>
+  <div id="chat-list"></div>
+  <div class="chat-in">
+    <textarea id="chat-input" rows="1" placeholder="就学术思想、辨证、方药、医案提问…"></textarea>
+    <button id="chat-send">送 出</button>
   </div>
 </section>
 
@@ -209,6 +237,7 @@
           <li><b>观图</b>：单指拖动平移，双指捏合缩放，轻点节点查看详情，双击快速放大。</li>
           <li><b>聚焦</b>：在详情中点「聚焦」，可将该节点及其邻居单独铺开，逐层探索。</li>
           <li><b>筛选</b>：按知识来源、文献、实体类型过滤，可专看某一部典籍。</li>
+          <li><b>问道</b>：基于图谱检索增强的问答。检索在手机上离线完成，只有生成一步调用你在设置中填写的 MiniMax / Poe 服务；每条回答下方附「依据」，点即回到图谱核验。</li>
           <li><b>夜读</b>：右下角月牙按钮可切换宣纸 / 夜读配色。</li>
         </ul>
       </div>
@@ -251,23 +280,79 @@
   </div>
 </div>
 
+<!-- ================= 问道设置 ================= -->
+<div class="overlay" id="ov-chat">
+  <div class="ov-head">
+    <h3>问 道 · 设 置</h3>
+    <button class="iconbtn" data-close="ov-chat" aria-label="关闭" style="width:34px;height:34px">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="ov-body">
+    <form id="chat-form" onsubmit="return false">
+      <input type="hidden" name="provider" value="minimax"/><input type="hidden" name="mmSite" value="cn"/>
+      <div class="cs-sec">
+        <h4>生成模型 <small>检索在手机上离线完成，只有生成一步调用所选服务</small></h4>
+        <div class="fchips" id="cs-prov">
+          <button type="button" class="chip on" data-v="minimax">MiniMax</button>
+          <button type="button" class="chip" data-v="poe">Poe</button>
+        </div>
+        <div id="cs-mm">
+          <label class="fld"><span>MiniMax 模型</span><input type="text" name="mmModel" value="MiniMax-M3" autocomplete="off"/></label>
+          <label class="fld pw"><span>MiniMax API Key　<small>开放平台 → 账户管理 → 接口密钥</small></span>
+            <input type="password" name="keyMm" autocomplete="off"/><button type="button" class="pw-eye">👁</button></label>
+          <div class="fld"><span>接入站点</span>
+            <div class="fchips" id="cs-site">
+              <button type="button" class="chip on" data-v="cn">国内站 api.minimax.chat</button>
+              <button type="button" class="chip" data-v="intl">国际站 api.minimaxi.chat</button>
+            </div></div>
+          <label class="fld"><span>GroupId（可选）</span><input type="text" name="mmGroup" autocomplete="off"/></label>
+        </div>
+        <div id="cs-poe" hidden>
+          <label class="fld"><span>Poe 模型　<small>未上架时自动退到同族最新版</small></span><input type="text" name="poeModel" value="claude-sonnet-5" autocomplete="off"/></label>
+          <label class="fld pw"><span>Poe API Key　<small>poe.com/api_key</small></span>
+            <input type="password" name="keyPoe" autocomplete="off"/><button type="button" class="pw-eye">👁</button></label>
+          <button type="button" class="cs-btn" id="cs-check">校验模型名</button>
+          <div class="cs-out" id="cs-check-out"></div>
+        </div>
+        <label class="fld rng"><span>温度</span><input type="range" name="temperature" min="0" max="1" step="0.05" value="0.3"/><b id="cs-temp-v">0.30</b></label>
+        <button type="button" class="cs-btn" id="cs-test">连通性自检</button>
+        <div class="cs-out" id="cs-test-out"></div>
+      </div>
+      <div class="cs-sec">
+        <h4>检索档位 <small>送入模型的图谱证据规模</small></h4>
+        <label class="fld rng"><span>种子实体数</span><input type="range" name="topSeeds" min="3" max="60" step="1" value="35"/><b id="cs-seeds-v">35</b></label>
+        <label class="fld rng"><span>检索关系数</span><input type="range" name="maxEdges" min="12" max="300" step="4" value="120"/><b id="cs-edges-v">120</b></label>
+        <label class="fld rng"><span>上下文字数</span><input type="range" name="maxChars" min="2000" max="20000" step="100" value="9900"/><b id="cs-chars-v">9900</b></label>
+        <label class="fld chk"><input type="checkbox" name="showEvidence" checked/> 在回答下方显示「依据」面板</label>
+      </div>
+      <div class="cs-sec">
+        <div class="note" style="font-size:11.5px">密钥只保存在本机应用内，仅在你提问时随请求发送给所选服务商；应用不会访问其它任何服务器。</div>
+      </div>
+    </form>
+    <div class="cs-foot"><button class="cs-btn solid" id="cs-save">保 存</button></div>
+  </div>
+</div>
+
 <!-- ================= 底部导航 ================= -->
 <nav id="nav">
   <button class="tab on" data-go="home">
     <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M9.5 20v-6h5v6"/></svg>卷首</button>
   <button class="tab" data-go="graph">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="17" r="2.2"/><circle cx="19" cy="17" r="2.2"/><path d="M12 7.2 6.6 14.9M13.4 6.8 17.6 14.9M7.2 17h9.6"/></svg>观图</button>
+  <button class="tab" data-go="chat">
+    <svg viewBox="0 0 24 24"><path d="M4 6.5h16v10H9l-4 3.5v-3.5H4z"/><path d="M8 10.5h8M8 13.5h5"/></svg>问道</button>
   <button class="tab" data-go="search">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.4"/><path d="M15.8 15.8 20 20"/></svg>检索</button>
   <button class="tab" data-go="lib">
     <svg viewBox="0 0 24 24"><path d="M4 5.5h7v14H4zM13 5.5h7v14h-7zM6.5 9h2M15.5 9h2"/></svg>典籍</button>
-  <button class="tab" data-go="about">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 11v5.5M12 8.2v.2"/></svg>关于</button>
 </nav>
 
 <div id="toast"></div>
 </div>
 
+<script src="js/rag.js"></script>
+<script src="js/chat.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
