@@ -1,0 +1,48 @@
+﻿表2 知识图谱关系类型、典型定义域/值域及实例数
+关系,英文名,典型定义域→值域（占比）,实例数/条,待审率/%
+见症,hasSymptom,证候→症状（42%）,3 244,0.2
+主治,treats,方剂→证候（22%）,1 859,1.9
+技术主治,techniqueTreats,康复技术→疾病（47%）,1 773,3.8
+药出典,herbSourceText,中药→经典文献（47%）,1 767,1.3
+含药,containsHerb,新方→中药（51%）,1 736,0.2
+含药组,containsTriplet,处方→三联药组（87%）,1 312,0.1
+明机立法,establishesMethod,证候→治法（44%）,1 207,1.7
+病之证型,syndromeOfDisease,证候→疾病（91%）,949,7.3
+药组含药,tripletHasMember,三联药组→中药（100%）,872,0.0
+方术来源,hasSourceCitation,新方→文献出处（36%）,818,2.0
+倡自,proposedBy,学术观点→医家（42%）,817,1.2
+审证求因,attributedToEtiology,疾病→病因（41%）,785,8.9
+求因明机,explainedByMechanism,证候→病机（50%）,656,9.0
+舌象所见,presentsTongueSign,证候→舌象（51%）,632,2.4
+脉象所见,presentsPulseSign,诊次→脉象（48%）,575,2.6
+立法组方,methodUsesFormula,治法→方剂（57%）,574,1.4
+美容主治,indicatedForCosmetic,中药→美容适应证（67%）,563,1.4
+原作者,originallyAuthoredBy,新方→医家（55%）,538,1.5
+功效,hasFunction,三联药组→治法（73%）,516,1.7
+论及,viewpointAbout,学术观点→疾病（30%）,441,8.6
+病机演变,mechanismLeadsTo,病机→病机（88%）,438,1.8
+引经据典,cites,学术观点→经典文献（25%）,423,6.9
+加减,modifiesPrescription,方剂→中药（73%）,360,6.9
+辨证为,diagnosedAsSyndrome,诊次→证候（55%）,309,14.2
+处方,prescribed,诊次→处方（93%）,303,4.3
+阐发,commentsOn,学术观点→名言（75%）,292,1.4
+治则指导治法,principleGuidesMethod,治则→治法（63%）,286,37.4
+引自,quotesFrom,名言→经典文献（91%）,264,1.5
+行养生法,practicesMethod,学术观点→养生法（57%）,246,2.4
+含诊次,hasVisit,医案→诊次（100%）,236,0.0
+病案病名,caseDiagnosesDisease,医案→疾病（69%）,194,6.2
+病案患者,caseOfPatient,医案→患者特征（98%）,165,2.4
+以方为基,basedOnFormula,处方→方剂（67%）,154,16.9
+医案示,caseIllustrates,医案→学术观点（48%）,79,13.9
+药对含药,pairHasMember,药对→中药（100%）,71,0.0
+思想含治则,thoughtHasPrinciple,中和思想→治则（43%）,65,20.0
+渊源,derivedFrom,方剂→经典文献（31%）,64,10.9
+要诀所述,maximExpresses,心法要诀→学术观点（27%）,56,8.9
+属学派,belongsToSchool,医家→学派（100%）,15,0.0
+治则见于药组,realizedByTriplet,治则→三联药组（71%）,14,0.0
+师承,studiedUnder,医家→医家（100%）,13,0.0
+编纂者,compiledBy,经典文献→医家（92%）,12,8.3
+易以,substitutesFor,中药→中药（100%）,11,0.0
+药组基于药对,tripletExtendsPair,三联药组→药对（100%）,9,0.0
+合计,44 类,,25 713,3.1
+注：待审率指未通过本体定义域/值域一致性校验、在图谱中标记为“待审”的关系比例。

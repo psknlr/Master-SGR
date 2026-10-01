@@ -6,3 +6,6 @@ android/out/*.idsig
 # 本地 SDK / 依赖
 android-sdk/
 node_modules/
+
+# Python 缓存
+__pycache__/

@@ -1,0 +1,234 @@
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "中医养生分六层级:德、道、学、法、术、器", "question": "“中医养生分六层级:德、道、学、法、术、器”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "中医养生分六层级:德、道、学、法、术、器", "养生之器"], ["THOUGHT_HAS_PRINCIPLE", "中医养生分六层级:德、道、学、法、术、器", "养生之学"], ["THOUGHT_HAS_PRINCIPLE", "中医养生分六层级:德、道、学、法、术、器", "养生之德"], ["THOUGHT_HAS_PRINCIPLE", "中医养生分六层级:德、道、学、法、术、器", "养生之术"], ["THOUGHT_HAS_PRINCIPLE", "中医养生分六层级:德、道、学、法、术、器", "养生之法"], ["THOUGHT_HAS_PRINCIPLE", "中医养生分六层级:德、道、学、法、术、器", "养生之道"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "治未病强调形与神俱、和合平衡", "question": "“治未病强调形与神俱、和合平衡”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "治未病强调形与神俱、和合平衡", "调之使平"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "中和学术思想", "question": "“中和学术思想”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "上静—中和—下畅"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "存正抑邪"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "存正抗邪"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "存正抗邪达中和"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "平升降"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "扶正祛邪"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "扶正祛邪畅中和"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "护正防邪"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "护正防邪固中和"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "清、平、轻、巧、灵"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "衡出入"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "调气血"], ["THOUGHT_HAS_PRINCIPLE", "中和学术思想", "贵阳贱阴"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "治未病思想四层内涵", "question": "“治未病思想四层内涵”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "治未病思想四层内涵", "既病防变"], ["THOUGHT_HAS_PRINCIPLE", "治未病思想四层内涵", "未病先防"], ["THOUGHT_HAS_PRINCIPLE", "治未病思想四层内涵", "病中防逆转"], ["THOUGHT_HAS_PRINCIPLE", "治未病思想四层内涵", "瘥后防复发"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "调和肝脾、安养心神", "question": "“调和肝脾、安养心神”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "调和肝脾、安养心神", "调和肝脾、安养心神"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "中和辨证方法", "question": "“中和辨证方法”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "中和辨证方法", "五脏调和、扶正祛邪"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "以调和阴阳为核心的中和治疗观", "question": "“以调和阴阳为核心的中和治疗观”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "以调和阴阳为核心的中和治疗观", "先察阴阳气血升降出入,调之使平"], ["THOUGHT_HAS_PRINCIPLE", "以调和阴阳为核心的中和治疗观", "实则泻之,虚则补之"], ["THOUGHT_HAS_PRINCIPLE", "以调和阴阳为核心的中和治疗观", "补其不足,损其有余"], ["THOUGHT_HAS_PRINCIPLE", "以调和阴阳为核心的中和治疗观", "调气血,平升降,衡出入"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "以形神为主线的20个辨证元素", "question": "“以形神为主线的20个辨证元素”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "以形神为主线的20个辨证元素", "失中失和"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "中和组方", "question": "“中和组方”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "中和组方", "中病即止,不滥伐无过"], ["THOUGHT_HAS_PRINCIPLE", "中和组方", "从顺其宜,病人乐于接受"], ["THOUGHT_HAS_PRINCIPLE", "中和组方", "谨守病机,以平为期"], ["THOUGHT_HAS_PRINCIPLE", "中和组方", "遵经方之旨,不泥经方用药"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "调和阴阳的治疗思想", "question": "“调和阴阳的治疗思想”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "调和阴阳的治疗思想", "调和阴阳"], ["THOUGHT_HAS_PRINCIPLE", "调和阴阳的治疗思想", "重视阴阳对立统一、调和平衡"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "炎症主要因热毒所致，以清热解毒为基本治则", "question": "“炎症主要因热毒所致，以清热解毒为基本治则”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "炎症主要因热毒所致，以清热解毒为基本治则", "清热解毒"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "本为主矛盾,标为次矛盾", "question": "“本为主矛盾,标为次矛盾”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "本为主矛盾,标为次矛盾", "急则治其标"], ["THOUGHT_HAS_PRINCIPLE", "本为主矛盾,标为次矛盾", "标本兼治"], ["THOUGHT_HAS_PRINCIPLE", "本为主矛盾,标为次矛盾", "缓则治其本"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "以三联药组构成三型组合、依药组功效区分君臣佐使的处方模式", "question": "“以三联药组构成三型组合、依药组功效区分君臣佐使的处方模式”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "以三联药组构成三型组合、依药组功效区分君臣佐使的处方模式", "扶正祛邪"], ["THOUGHT_HAS_PRINCIPLE", "以三联药组构成三型组合、依药组功效区分君臣佐使的处方模式", "扶正组合"], ["THOUGHT_HAS_PRINCIPLE", "以三联药组构成三型组合、依药组功效区分君臣佐使的处方模式", "祛邪组合"], ["THOUGHT_HAS_PRINCIPLE", "以三联药组构成三型组合、依药组功效区分君臣佐使的处方模式", "补偏救弊"], ["THOUGHT_HAS_PRINCIPLE", "以三联药组构成三型组合、依药组功效区分君臣佐使的处方模式", "辅助组合"]]}
+{"rel": "THOUGHT_HAS_PRINCIPLE", "subject": "中和医学学术思想", "question": "“中和医学学术思想”包含哪些治疗原则？", "gold": [["THOUGHT_HAS_PRINCIPLE", "中和医学学术思想", "慈悲为本、仁爱为先、一视同仁、中和乃根"], ["THOUGHT_HAS_PRINCIPLE", "中和医学学术思想", "扶正祛邪益中和"], ["THOUGHT_HAS_PRINCIPLE", "中和医学学术思想", "调气血"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "益气健脾", "question": "在“益气健脾”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "益气健脾", "针刺泻法"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "疏肝和胃", "question": "在“疏肝和胃”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "疏肝和胃", "柴胡疏肝散"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "调气血,平升降,衡出入", "question": "在“调气血,平升降,衡出入”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "调气血,平升降,衡出入", "以调为手段,以和为目的"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "滋养肝肾", "question": "在“滋养肝肾”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "滋养肝肾", "左归饮"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "祛痰散结、疏风通络", "question": "在“祛痰散结、疏风通络”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "祛痰散结、疏风通络", "针刺泻法"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "护正防邪固中和", "question": "在“护正防邪固中和”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "护正防邪固中和", "平升降"], ["PRINCIPLE_GUIDES_METHOD", "护正防邪固中和", "护脾胃"], ["PRINCIPLE_GUIDES_METHOD", "护正防邪固中和", "衡出入"], ["PRINCIPLE_GUIDES_METHOD", "护正防邪固中和", "调气血"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "化痰降浊", "question": "在“化痰降浊”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "化痰降浊", "化痰通络"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "益气养血、行气疏肝、和胃止痛", "question": "在“益气养血、行气疏肝、和胃止痛”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "益气养血、行气疏肝、和胃止痛", "和胃止痛"], ["PRINCIPLE_GUIDES_METHOD", "益气养血、行气疏肝、和胃止痛", "益气养血"], ["PRINCIPLE_GUIDES_METHOD", "益气养血、行气疏肝、和胃止痛", "行气疏肝"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "泄肝和胃", "question": "在“泄肝和胃”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "泄肝和胃", "化肝煎合左金丸"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "健脾益气，兼解余毒", "question": "在“健脾益气，兼解余毒”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "健脾益气，兼解余毒", "脾胃虚弱"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "补肾健脾，引火归源", "question": "在“补肾健脾，引火归源”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "补肾健脾，引火归源", "六味地黄丸加肉桂"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "清热解毒利湿、益气养阴（基本治则）", "question": "在“清热解毒利湿、益气养阴（基本治则）”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "清热解毒利湿、益气养阴（基本治则）", "清热解毒、渗湿利水"], ["PRINCIPLE_GUIDES_METHOD", "清热解毒利湿、益气养阴（基本治则）", "益气养阴、清利湿热"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "清热解毒", "question": "在“清热解毒”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "清热解毒", "健脾利湿，疏风解毒"], ["PRINCIPLE_GUIDES_METHOD", "清热解毒", "凉营"], ["PRINCIPLE_GUIDES_METHOD", "清热解毒", "清气"], ["PRINCIPLE_GUIDES_METHOD", "清热解毒", "清热解毒，排脓祛腐"], ["PRINCIPLE_GUIDES_METHOD", "清热解毒", "清营凉血，泻热解毒"], ["PRINCIPLE_GUIDES_METHOD", "清热解毒", "疏风清热解毒"], ["PRINCIPLE_GUIDES_METHOD", "清热解毒", "疏风清热，解毒消肿"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "疏风宣肺，化痰止咳", "question": "在“疏风宣肺，化痰止咳”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "疏风宣肺，化痰止咳", "清热润燥"], ["PRINCIPLE_GUIDES_METHOD", "疏风宣肺，化痰止咳", "疏风散寒"], ["PRINCIPLE_GUIDES_METHOD", "疏风宣肺，化痰止咳", "疏风清热"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "化瘀通络", "question": "在“化瘀通络”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "化瘀通络", "手拈散"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "急则治标、缓则治本", "question": "在“急则治标、缓则治本”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "急则治标、缓则治本", "疏肝和胃，清热止血"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "散风清热解毒", "question": "在“散风清热解毒”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "散风清热解毒", "风热挟毒"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "和胃降逆，开结散痞", "question": "在“和胃降逆，开结散痞”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "和胃降逆，开结散痞", "半夏泻心汤"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "扶正祛邪、标本兼治", "question": "在“扶正祛邪、标本兼治”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "扶正祛邪、标本兼治", "健脾和胃"], ["PRINCIPLE_GUIDES_METHOD", "扶正祛邪、标本兼治", "清热解毒"], ["PRINCIPLE_GUIDES_METHOD", "扶正祛邪、标本兼治", "益气活血"], ["PRINCIPLE_GUIDES_METHOD", "扶正祛邪、标本兼治", "软坚散结"]]}
+{"rel": "PRINCIPLE_GUIDES_METHOD", "subject": "活络止痛，舒筋骨，利关节", "question": "在“活络止痛，舒筋骨，利关节”这一治则指导下，宜采用哪些治法？", "gold": [["PRINCIPLE_GUIDES_METHOD", "活络止痛，舒筋骨，利关节", "扶阳温督，祛寒通络"], ["PRINCIPLE_GUIDES_METHOD", "活络止痛，舒筋骨，利关节", "益气养血"], ["PRINCIPLE_GUIDES_METHOD", "活络止痛，舒筋骨，利关节", "补肾益精、养肝柔筋"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "痰瘀阻窍", "question": "痰瘀阻窍应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "痰瘀阻窍", "息风化痰,祛瘀通窍"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "气血两虚兼见血热", "question": "气血两虚兼见血热应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "气血两虚兼见血热", "凉血安胎"], ["ESTABLISHES_METHOD", "气血两虚兼见血热", "益气补血"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "热扰心神", "question": "热扰心神应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "热扰心神", "养阴清热,宁心安神"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "脾胃虚寒证", "question": "脾胃虚寒证应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "脾胃虚寒证", "温补脾胃"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "湿热内生", "question": "湿热内生应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "湿热内生", "清解湿热"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "气阴两亏、痰热互结、水饮内停", "question": "气阴两亏、痰热互结、水饮内停应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "气阴两亏、痰热互结、水饮内停", "益气养阴、清热解毒、化痰利水"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "肝气逆乱,痰瘀内生", "question": "肝气逆乱,痰瘀内生应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "肝气逆乱,痰瘀内生", "益气活血、疏肝益肾、化痰开窍"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "气虚血瘀;心阴不足、肝气失和", "question": "气虚血瘀;心阴不足、肝气失和应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "气虚血瘀;心阴不足、肝气失和", "柔肝养心安神"], ["ESTABLISHES_METHOD", "气虚血瘀;心阴不足、肝气失和", "益气活血化瘀"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "脾肾两虚,瘀血内阻", "question": "脾肾两虚,瘀血内阻应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "脾肾两虚,瘀血内阻", "健脾补肾,活血祛瘀"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "痰热扰心", "question": "痰热扰心应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "痰热扰心", "清热化痰,和中安神"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "脾胃湿热所致之咳嗽", "question": "脾胃湿热所致之咳嗽应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "脾胃湿热所致之咳嗽", "清热祛湿"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "肾阳不足", "question": "肾阳不足应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "肾阳不足", "引火归元以消阴翳"], ["ESTABLISHES_METHOD", "肾阳不足", "温肾壮阳"], ["ESTABLISHES_METHOD", "肾阳不足", "温补肾阳"], ["ESTABLISHES_METHOD", "肾阳不足", "补肾壮阳"], ["ESTABLISHES_METHOD", "肾阳不足", "补肾纳气"], ["ESTABLISHES_METHOD", "肾阳不足", "补肾纳气，止咳平喘"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "气阴不足,痰瘀热毒结聚", "question": "气阴不足,痰瘀热毒结聚应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "气阴不足,痰瘀热毒结聚", "滋养心肾"], ["ESTABLISHES_METHOD", "气阴不足,痰瘀热毒结聚", "益气养阴、化痰活血、清热解毒、散结"], ["ESTABLISHES_METHOD", "气阴不足,痰瘀热毒结聚", "益气养阴、化痰活血清热解毒散结"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "热毒内蕴,迫血妄行", "question": "热毒内蕴,迫血妄行应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "热毒内蕴,迫血妄行", "凉血止血"], ["ESTABLISHES_METHOD", "热毒内蕴,迫血妄行", "清热解毒"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "气阴不足,风邪恋肺", "question": "气阴不足,风邪恋肺应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "气阴不足,风邪恋肺", "益气养阴、祛风利咽"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "心脾两虚,气血不足", "question": "心脾两虚,气血不足应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "心脾两虚,气血不足", "益气养血"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "塑结于少阳、阳明之络", "question": "塑结于少阳、阳明之络应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "塑结于少阳、阳明之络", "清热泻火、解毒为基本治则"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "面部痤疮", "question": "面部痤疮应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "面部痤疮", "益气养阴、凉血活血、清热利湿"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "肝阳上亢,痰瘀内阻", "question": "肝阳上亢,痰瘀内阻应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "肝阳上亢,痰瘀内阻", "和胃化痰"], ["ESTABLISHES_METHOD", "肝阳上亢,痰瘀内阻", "平肝潜阳"]]}
+{"rel": "ESTABLISHES_METHOD", "subject": "阴虚火旺", "question": "阴虚火旺应如何立法治疗？", "gold": [["ESTABLISHES_METHOD", "阴虚火旺", "养阴清热，宣肺理气"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴泻火"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴清热"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴清热和络"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴清热，退翳明目"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴益肾，清降虚火"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴降火"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴降火,养心安神"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴降火，凉血止血"], ["ESTABLISHES_METHOD", "阴虚火旺", "滋阴降火，凉血解毒"]]}
+{"rel": "EXPLAINED_BY", "subject": "神疲乏力", "question": "神疲乏力的病机是什么？", "gold": [["EXPLAINED_BY", "神疲乏力", "脾虚"]]}
+{"rel": "EXPLAINED_BY", "subject": "心神失养", "question": "心神失养的病机是什么？", "gold": [["EXPLAINED_BY", "心神失养", "虚和郁互为因果"]]}
+{"rel": "EXPLAINED_BY", "subject": "大便难", "question": "大便难的病机是什么？", "gold": [["EXPLAINED_BY", "大便难", "津液不足,肠道失于濡润则大便难"]]}
+{"rel": "EXPLAINED_BY", "subject": "易疲劳", "question": "易疲劳的病机是什么？", "gold": [["EXPLAINED_BY", "易疲劳", "心脾两虚,气血不足"]]}
+{"rel": "EXPLAINED_BY", "subject": "寒凝督脉，经络阻滞", "question": "寒凝督脉，经络阻滞的病机是什么？", "gold": [["EXPLAINED_BY", "寒凝督脉，经络阻滞", "寒凝督脉"]]}
+{"rel": "EXPLAINED_BY", "subject": "伤口疼痛", "question": "伤口疼痛的病机是什么？", "gold": [["EXPLAINED_BY", "伤口疼痛", "热毒、血瘀阻滞,不通则痛"]]}
+{"rel": "EXPLAINED_BY", "subject": "怒、忧、思、悲", "question": "怒、忧、思、悲的病机是什么？", "gold": [["EXPLAINED_BY", "怒、忧、思、悲", "喜怒不节则伤脏"]]}
+{"rel": "EXPLAINED_BY", "subject": "阴阳否格", "question": "阴阳否格的病机是什么？", "gold": [["EXPLAINED_BY", "阴阳否格", "阳气上而不下曰否"], ["EXPLAINED_BY", "阴阳否格", "阳气下而不上曰格"], ["EXPLAINED_BY", "阴阳否格", "阴气上而不下亦曰格"], ["EXPLAINED_BY", "阴阳否格", "阴气下而不上亦曰否"]]}
+{"rel": "EXPLAINED_BY", "subject": "口干", "question": "口干的病机是什么？", "gold": [["EXPLAINED_BY", "口干", "气阴不足,则口干"]]}
+{"rel": "EXPLAINED_BY", "subject": "刘某初诊", "question": "刘某初诊的病机是什么？", "gold": [["EXPLAINED_BY", "刘某初诊", "其根在肾虚"]]}
+{"rel": "EXPLAINED_BY", "subject": "气阴不足,气郁痰湿上蒙心窍", "question": "气阴不足,气郁痰湿上蒙心窍的病机是什么？", "gold": [["EXPLAINED_BY", "气阴不足,气郁痰湿上蒙心窍", "心神失养"], ["EXPLAINED_BY", "气阴不足,气郁痰湿上蒙心窍", "痰湿上蒙心窍"]]}
+{"rel": "EXPLAINED_BY", "subject": "脾胃虚寒、心神失养", "question": "脾胃虚寒、心神失养的病机是什么？", "gold": [["EXPLAINED_BY", "脾胃虚寒、心神失养", "心神失养"], ["EXPLAINED_BY", "脾胃虚寒、心神失养", "脾胃虚寒"]]}
+{"rel": "EXPLAINED_BY", "subject": "脾胃失健运", "question": "脾胃失健运的病机是什么？", "gold": [["EXPLAINED_BY", "脾胃失健运", "脾失健运,内湿蕴于中焦,日久形成湿热"]]}
+{"rel": "EXPLAINED_BY", "subject": "肺失宣降,痰瘀阻络", "question": "肺失宣降,痰瘀阻络的病机是什么？", "gold": [["EXPLAINED_BY", "肺失宣降,痰瘀阻络", "久病入络,气机不利,痰瘀阻络"], ["EXPLAINED_BY", "肺失宣降,痰瘀阻络", "湿热胶着,痰浊内蕴"], ["EXPLAINED_BY", "肺失宣降,痰瘀阻络", "痰浊阻碍,呼吸不利"], ["EXPLAINED_BY", "肺失宣降,痰瘀阻络", "肺失宣降,鼻窍不通"]]}
+{"rel": "EXPLAINED_BY", "subject": "湿热下注,脾肾不足", "question": "湿热下注,脾肾不足的病机是什么？", "gold": [["EXPLAINED_BY", "湿热下注,脾肾不足", "湿热下注,蕴结膀胱"], ["EXPLAINED_BY", "湿热下注,脾肾不足", "胃气失和致胃胀痛"], ["EXPLAINED_BY", "湿热下注,脾肾不足", "脾肾气虚,遇劳气化不行,致淋证反复"]]}
+{"rel": "EXPLAINED_BY", "subject": "气阴不足,热毒阻肠", "question": "气阴不足,热毒阻肠的病机是什么？", "gold": [["EXPLAINED_BY", "气阴不足,热毒阻肠", "毒热结聚于直肠日久而成瘤"], ["EXPLAINED_BY", "气阴不足,热毒阻肠", "气阴不足不能上荣于头而致头晕"], ["EXPLAINED_BY", "气阴不足,热毒阻肠", "气阴不足而致乏力、舌淡苔白、脉细涩"], ["EXPLAINED_BY", "气阴不足,热毒阻肠", "热毒损伤血络而致大便带血"]]}
+{"rel": "EXPLAINED_BY", "subject": "气血瘀阻，筋骨不利", "question": "气血瘀阻，筋骨不利的病机是什么？", "gold": [["EXPLAINED_BY", "气血瘀阻，筋骨不利", "筋骨瘀阻"]]}
+{"rel": "EXPLAINED_BY", "subject": "焦虑不安", "question": "焦虑不安的病机是什么？", "gold": [["EXPLAINED_BY", "焦虑不安", "虚火上扰,神无所主,则焦虑不安"]]}
+{"rel": "EXPLAINED_BY", "subject": "乏力", "question": "乏力的病机是什么？", "gold": [["EXPLAINED_BY", "乏力", "术后气血不足"], ["EXPLAINED_BY", "乏力", "气虚"]]}
+{"rel": "EXPLAINED_BY", "subject": "痰瘀互结于脑", "question": "痰瘀互结于脑的病机是什么？", "gold": [["EXPLAINED_BY", "痰瘀互结于脑", "头痛头晕"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "脏腑阴阳失调、气血虚损", "question": "脏腑阴阳失调、气血虚损的病因有哪些？", "gold": [["ATTRIBUTED_TO", "脏腑阴阳失调、气血虚损", "饮食失调、劳倦过度、情志不畅"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "咽痒", "question": "咽痒的病因有哪些？", "gold": [["ATTRIBUTED_TO", "咽痒", "风邪为患"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "白带中夹有血丝", "question": "白带中夹有血丝的病因有哪些？", "gold": [["ATTRIBUTED_TO", "白带中夹有血丝", "瘀热毒邪"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "风热袭肺,痰热阻肺", "question": "风热袭肺,痰热阻肺的病因有哪些？", "gold": [["ATTRIBUTED_TO", "风热袭肺,痰热阻肺", "外感风热之邪"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "本病（炎症）", "question": "本病（炎症）的病因有哪些？", "gold": [["ATTRIBUTED_TO", "本病（炎症）", "体虚而邪阻经络"], ["ATTRIBUTED_TO", "本病（炎症）", "肺脾蕴热"], ["ATTRIBUTED_TO", "本病（炎症）", "肺脾郁热"], ["ATTRIBUTED_TO", "本病（炎症）", "脏腑虚损、虚火上炎"], ["ATTRIBUTED_TO", "本病（炎症）", "风热外袭"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "肾气不足", "question": "肾气不足的病因有哪些？", "gold": [["ATTRIBUTED_TO", "肾气不足", "肾气不足"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "正虚邪实", "question": "正虚邪实的病因有哪些？", "gold": [["ATTRIBUTED_TO", "正虚邪实", "外感六淫、七情内伤、饮食不节、房劳过度或生育产伤"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "阴虚内热", "question": "阴虚内热的病因有哪些？", "gold": [["ATTRIBUTED_TO", "阴虚内热", "大剂量激素治疗"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "急性喉-气管-支气管炎", "question": "急性喉-气管-支气管炎的病因有哪些？", "gold": [["ATTRIBUTED_TO", "急性喉-气管-支气管炎", "风热痰火搏结"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "阴阳两虚,血瘀水停", "question": "阴阳两虚,血瘀水停的病因有哪些？", "gold": [["ATTRIBUTED_TO", "阴阳两虚,血瘀水停", "心痹日久"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "首诊（2011年12月2日）", "question": "首诊（2011年12月2日）的病因有哪些？", "gold": [["ATTRIBUTED_TO", "首诊（2011年12月2日）", "痰邪"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "气血两虚,痰浊阻滞,心神不宁", "question": "气血两虚,痰浊阻滞,心神不宁的病因有哪些？", "gold": [["ATTRIBUTED_TO", "气血两虚,痰浊阻滞,心神不宁", "虚、瘀、郁互为因果"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "湿热证", "question": "湿热证的病因有哪些？", "gold": [["ATTRIBUTED_TO", "湿热证", "药邪所伤、护理不当"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "痰瘀久蕴发为中风", "question": "痰瘀久蕴发为中风的病因有哪些？", "gold": [["ATTRIBUTED_TO", "痰瘀久蕴发为中风", "风邪引动"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "不寐", "question": "不寐的病因有哪些？", "gold": [["ATTRIBUTED_TO", "不寐", "热毒伤阴"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "纳呆", "question": "纳呆的病因有哪些？", "gold": [["ATTRIBUTED_TO", "纳呆", "脾胃虚弱"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "胃胀", "question": "胃胀的病因有哪些？", "gold": [["ATTRIBUTED_TO", "胃胀", "脾胃虚寒、胃气阻滞"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "气血不足,痰瘀毒聚", "question": "气血不足,痰瘀毒聚的病因有哪些？", "gold": [["ATTRIBUTED_TO", "气血不足,痰瘀毒聚", "痰瘀毒聚于脑日久"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "气血不足,肾精亏虚", "question": "气血不足,肾精亏虚的病因有哪些？", "gold": [["ATTRIBUTED_TO", "气血不足,肾精亏虚", "失于调养,劳累日久秏伤"]]}
+{"rel": "ATTRIBUTED_TO", "subject": "经来腰痛、腹痛", "question": "经来腰痛、腹痛的病因有哪些？", "gold": [["ATTRIBUTED_TO", "经来腰痛、腹痛", "肾阳不足"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "清燥润肺、止咳平喘", "question": "清燥润肺、止咳平喘可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "清燥润肺、止咳平喘", "孙光荣地茶止咳饮"], ["METHOD_USES_FORMULA", "清燥润肺、止咳平喘", "孙氏地茶止咳饮"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "祛风利咽", "question": "祛风利咽可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "祛风利咽", "地茶止咳饮"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "益气养血止血", "question": "益气养血止血可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "益气养血止血", "孙光荣调经汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "化痰利湿", "question": "化痰利湿可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "化痰利湿", "孙光荣正天抑瘤汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "清热祛湿", "question": "清热祛湿可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "清热祛湿", "清热祛湿三叶汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "化瘀、清热、解郁、通窍", "question": "化瘀、清热、解郁、通窍可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "化瘀、清热、解郁、通窍", "解郁开窍汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "疏肝和胃，清热止血", "question": "疏肝和胃，清热止血可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "疏肝和胃，清热止血", "龙胆泻肝汤加减"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "化痰开窍,疏肝解郁", "question": "化痰开窍,疏肝解郁可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "化痰开窍,疏肝解郁", "孙光荣解郁开窍汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "养血祛风，通经活络", "question": "养血祛风，通经活络可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "养血祛风，通经活络", "大秦艽汤加减"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "温中健脾", "question": "温中健脾可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "温中健脾", "孙氏健脾和胃方"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "益气活血、化痰清热", "question": "益气活血、化痰清热可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "益气活血、化痰清热", "瓜蒌薤白白酒汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "清郁热,化瘀血,开神窍", "question": "清郁热,化瘀血,开神窍可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "清郁热,化瘀血,开神窍", "孙光荣解郁开窍汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "益气养血化湿", "question": "益气养血化湿可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "益气养血化湿", "归脾汤化裁"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "健脾益气、清肺平喘", "question": "健脾益气、清肺平喘可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "健脾益气、清肺平喘", "六君子汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "清暑化湿、宣肺平喘", "question": "清暑化湿、宣肺平喘可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "清暑化湿、宣肺平喘", "藿香正气散"], ["METHOD_USES_FORMULA", "清暑化湿、宣肺平喘", "藿香正气散加减"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "健脾益气，摄血止血", "question": "健脾益气，摄血止血可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "健脾益气，摄血止血", "归脾汤加减"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "益气养阴、化痰活血清热解毒散结", "question": "益气养阴、化痰活血清热解毒散结可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "益气养阴、化痰活血清热解毒散结", "孙光荣正天抑瘤汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "补虚扶正", "question": "补虚扶正可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "补虚扶正", "孙光荣养阴抑癌汤"], ["METHOD_USES_FORMULA", "补虚扶正", "孙光荣护巢抑癌汤"], ["METHOD_USES_FORMULA", "补虚扶正", "孙光荣正天抑瘤汤"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "顺气舒筋", "question": "顺气舒筋可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "顺气舒筋", "顺气匀风散加减"]]}
+{"rel": "METHOD_USES_FORMULA", "subject": "益气活血、补肾化痰", "question": "益气活血、补肾化痰可选用哪些方剂？", "gold": [["METHOD_USES_FORMULA", "益气活血、补肾化痰", "还少丹"], ["METHOD_USES_FORMULA", "益气活血、补肾化痰", "通窍活血汤"]]}
+{"rel": "HAS_FUNCTION", "subject": "阿胶珠+紫河车+全当归", "question": "三联药组“阿胶珠+紫河车+全当归”有何功效？", "gold": [["HAS_FUNCTION", "阿胶珠+紫河车+全当归", "补血养宫"]]}
+{"rel": "HAS_FUNCTION", "subject": "制首乌+龙眼肉+生甘草", "question": "三联药组“制首乌+龙眼肉+生甘草”有何功效？", "gold": [["HAS_FUNCTION", "制首乌+龙眼肉+生甘草", "养心安神"]]}
+{"rel": "HAS_FUNCTION", "subject": "车前子+生薏米+生甘草", "question": "三联药组“车前子+生薏米+生甘草”有何功效？", "gold": [["HAS_FUNCTION", "车前子+生薏米+生甘草", "清热利湿"]]}
+{"rel": "HAS_FUNCTION", "subject": "白花蛇舌草+半枝莲+猫爪草", "question": "三联药组“白花蛇舌草+半枝莲+猫爪草”有何功效？", "gold": [["HAS_FUNCTION", "白花蛇舌草+半枝莲+猫爪草", "清热抑癌"], ["HAS_FUNCTION", "白花蛇舌草+半枝莲+猫爪草", "清热解毒"], ["HAS_FUNCTION", "白花蛇舌草+半枝莲+猫爪草", "软坚散结"], ["HAS_FUNCTION", "白花蛇舌草+半枝莲+猫爪草", "软坚散结、清热解毒"]]}
+{"rel": "HAS_FUNCTION", "subject": "矮地茶+冬桑叶+南杏仁", "question": "三联药组“矮地茶+冬桑叶+南杏仁”有何功效？", "gold": [["HAS_FUNCTION", "矮地茶+冬桑叶+南杏仁", "清燥润肺、止咳平喘"]]}
+{"rel": "HAS_FUNCTION", "subject": "云茯神+炒枣仁+浮小麦", "question": "三联药组“云茯神+炒枣仁+浮小麦”有何功效？", "gold": [["HAS_FUNCTION", "云茯神+炒枣仁+浮小麦", "敛心安神"]]}
+{"rel": "HAS_FUNCTION", "subject": "全当归+阿胶珠+田三七+生地炭+地榆炭+川杜仲", "question": "三联药组“全当归+阿胶珠+田三七+生地炭+地榆炭+川杜仲”有何功效？", "gold": [["HAS_FUNCTION", "全当归+阿胶珠+田三七+生地炭+地榆炭+川杜仲", "养血止血"], ["HAS_FUNCTION", "全当归+阿胶珠+田三七+生地炭+地榆炭+川杜仲", "止血"]]}
+{"rel": "HAS_FUNCTION", "subject": "正川芎+西藁本+蔓荆子", "question": "三联药组“正川芎+西藁本+蔓荆子”有何功效？", "gold": [["HAS_FUNCTION", "正川芎+西藁本+蔓荆子", "祛风止痛,清利头目"]]}
+{"rel": "HAS_FUNCTION", "subject": "生甘草+浮小麦+大红枣", "question": "三联药组“生甘草+浮小麦+大红枣”有何功效？", "gold": [["HAS_FUNCTION", "生甘草+浮小麦+大红枣", "甘润平补,养心安神,和中缓急"]]}
+{"rel": "HAS_FUNCTION", "subject": "桑寄生、桑枝", "question": "三联药组“桑寄生、桑枝”有何功效？", "gold": [["HAS_FUNCTION", "桑寄生、桑枝", "疏经通络"]]}
+{"rel": "HAS_FUNCTION", "subject": "桑白皮+蒲公英+金银花", "question": "三联药组“桑白皮+蒲公英+金银花”有何功效？", "gold": [["HAS_FUNCTION", "桑白皮+蒲公英+金银花", "清肺热"]]}
+{"rel": "HAS_FUNCTION", "subject": "云茯神+酸枣仁", "question": "三联药组“云茯神+酸枣仁”有何功效？", "gold": [["HAS_FUNCTION", "云茯神+酸枣仁", "宁心安神"], ["HAS_FUNCTION", "云茯神+酸枣仁", "调和诸药"]]}
+{"rel": "HAS_FUNCTION", "subject": "山慈菇、菝葜根、白花蛇舌草、半枝莲、蒲公英、川牛膝", "question": "三联药组“山慈菇、菝葜根、白花蛇舌草、半枝莲、蒲公英、川牛膝”有何功效？", "gold": [["HAS_FUNCTION", "山慈菇、菝葜根、白花蛇舌草、半枝莲、蒲公英、川牛膝", "清热解毒"]]}
+{"rel": "HAS_FUNCTION", "subject": "大红枣+谷麦芽+浮小麦", "question": "三联药组“大红枣+谷麦芽+浮小麦”有何功效？", "gold": [["HAS_FUNCTION", "大红枣+谷麦芽+浮小麦", "滋阴清热"]]}
+{"rel": "HAS_FUNCTION", "subject": "益母草+香附", "question": "三联药组“益母草+香附”有何功效？", "gold": [["HAS_FUNCTION", "益母草+香附", "活血调经"], ["HAS_FUNCTION", "益母草+香附", "行气调经"]]}
+{"rel": "HAS_FUNCTION", "subject": "炙甘草", "question": "三联药组“炙甘草”有何功效？", "gold": [["HAS_FUNCTION", "炙甘草", "调和诸药"]]}
+{"rel": "HAS_FUNCTION", "subject": "上肉桂", "question": "三联药组“上肉桂”有何功效？", "gold": [["HAS_FUNCTION", "上肉桂", "矫正水蛭的土腥气味"]]}
+{"rel": "HAS_FUNCTION", "subject": "益母草+制香附", "question": "三联药组“益母草+制香附”有何功效？", "gold": [["HAS_FUNCTION", "益母草+制香附", "益气活血"]]}
+{"rel": "HAS_FUNCTION", "subject": "大生地+赤芍药+蒲公英", "question": "三联药组“大生地+赤芍药+蒲公英”有何功效？", "gold": [["HAS_FUNCTION", "大生地+赤芍药+蒲公英", "养经活血"]]}
+{"rel": "HAS_FUNCTION", "subject": "山慈菇+京三棱+制鳖甲", "question": "三联药组“山慈菇+京三棱+制鳖甲”有何功效？", "gold": [["HAS_FUNCTION", "山慈菇+京三棱+制鳖甲", "软坚散结"]]}
+{"rel": "TREATS", "subject": "石决明", "question": "石决明主治哪些病证？", "gold": [["TREATS", "石决明", "肝风内动"]]}
+{"rel": "TREATS", "subject": "猫爪草", "question": "猫爪草主治哪些病证？", "gold": [["TREATS", "猫爪草", "肿瘤"], ["TREATS", "猫爪草", "肿瘤淋巴结转移"]]}
+{"rel": "TREATS", "subject": "孙光荣护乳抑癌汤", "question": "孙光荣护乳抑癌汤主治哪些病证？", "gold": [["TREATS", "孙光荣护乳抑癌汤", "乳腺癌"]]}
+{"rel": "TREATS", "subject": "和脾胃法", "question": "和脾胃法主治哪些病证？", "gold": [["TREATS", "和脾胃法", "月经病"]]}
+{"rel": "TREATS", "subject": "清心安神", "question": "清心安神主治哪些病证？", "gold": [["TREATS", "清心安神", "不寐"]]}
+{"rel": "TREATS", "subject": "益气养血、滋补肝脾肾,兼清湿热", "question": "益气养血、滋补肝脾肾,兼清湿热主治哪些病证？", "gold": [["TREATS", "益气养血、滋补肝脾肾,兼清湿热", "气血虚弱,肝肾不足,湿热未尽,筋脉失养"]]}
+{"rel": "TREATS", "subject": "浄水蛭+地鳖虫+上肉桂", "question": "浄水蛭+地鳖虫+上肉桂主治哪些病证？", "gold": [["TREATS", "浄水蛭+地鳖虫+上肉桂", "癌块不散"]]}
+{"rel": "TREATS", "subject": "血府逐瘀汤", "question": "血府逐瘀汤主治哪些病证？", "gold": [["TREATS", "血府逐瘀汤", "瘀血停滞"], ["TREATS", "血府逐瘀汤", "瘀血内阻"], ["TREATS", "血府逐瘀汤", "瘀血内阻、经脉不通"]]}
+{"rel": "TREATS", "subject": "助产三仙饮", "question": "助产三仙饮主治哪些病证？", "gold": [["TREATS", "助产三仙饮", "习惯性流产并先兆流产"]]}
+{"rel": "TREATS", "subject": "清热散结", "question": "清热散结主治哪些病证？", "gold": [["TREATS", "清热散结", "多囊卵巢"]]}
+{"rel": "TREATS", "subject": "荆芥穗+矮地茶+蒲公英", "question": "荆芥穗+矮地茶+蒲公英主治哪些病证？", "gold": [["TREATS", "荆芥穗+矮地茶+蒲公英", "咳喘"], ["TREATS", "荆芥穗+矮地茶+蒲公英", "咳嗽"], ["TREATS", "荆芥穗+矮地茶+蒲公英", "咳痰"], ["TREATS", "荆芥穗+矮地茶+蒲公英", "咽痒"], ["TREATS", "荆芥穗+矮地茶+蒲公英", "咽痛"], ["TREATS", "荆芥穗+矮地茶+蒲公英", "恶寒"]]}
+{"rel": "TREATS", "subject": "夏枯草+木贼草+青箱子", "question": "夏枯草+木贼草+青箱子主治哪些病证？", "gold": [["TREATS", "夏枯草+木贼草+青箱子", "视物不明"]]}
+{"rel": "TREATS", "subject": "密蒙花+谷精草+青箱子", "question": "密蒙花+谷精草+青箱子主治哪些病证？", "gold": [["TREATS", "密蒙花+谷精草+青箱子", "视物不明"]]}
+{"rel": "TREATS", "subject": "生甘草+浮小麦+大红枣", "question": "生甘草+浮小麦+大红枣主治哪些病证？", "gold": [["TREATS", "生甘草+浮小麦+大红枣", "产后抑郁症"], ["TREATS", "生甘草+浮小麦+大红枣", "心阴不足、肝气失和"], ["TREATS", "生甘草+浮小麦+大红枣", "更年期综合症"], ["TREATS", "生甘草+浮小麦+大红枣", "癔病"], ["TREATS", "生甘草+浮小麦+大红枣", "神经官能症"]]}
+{"rel": "TREATS", "subject": "桃仁", "question": "桃仁主治哪些病证？", "gold": [["TREATS", "桃仁", "瘀血内阻之中风偏瘫"]]}
+{"rel": "TREATS", "subject": "海螵蛸+西砂仁+广橘络", "question": "海螵蛸+西砂仁+广橘络主治哪些病证？", "gold": [["TREATS", "海螵蛸+西砂仁+广橘络", "胃病"], ["TREATS", "海螵蛸+西砂仁+广橘络", "胃脘胀满"]]}
+{"rel": "TREATS", "subject": "孙氏护肝抑癌汤", "question": "孙氏护肝抑癌汤主治哪些病证？", "gold": [["TREATS", "孙氏护肝抑癌汤", "肝癌"]]}
+{"rel": "TREATS", "subject": "育阴平肝、熄风定眩法", "question": "育阴平肝、熄风定眩法主治哪些病证？", "gold": [["TREATS", "育阴平肝、熄风定眩法", "中风病"]]}
+{"rel": "TREATS", "subject": "归脾汤", "question": "归脾汤主治哪些病证？", "gold": [["TREATS", "归脾汤", "心脾两虚"], ["TREATS", "归脾汤", "气不摄血"]]}
+{"rel": "TREATS", "subject": "海金沙+金钱草", "question": "海金沙+金钱草主治哪些病证？", "gold": [["TREATS", "海金沙+金钱草", "胆气不利"]]}
+{"rel": "HAS_SYMPTOM", "subject": "初诊（莫某心悸）", "question": "初诊（莫某心悸）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "初诊（莫某心悸）", "失眠"], ["HAS_SYMPTOM", "初诊（莫某心悸）", "心悸"], ["HAS_SYMPTOM", "初诊（莫某心悸）", "神疲乏力"]]}
+{"rel": "HAS_SYMPTOM", "subject": "二诊（初诊方后7剂）", "question": "二诊（初诊方后7剂）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "二诊（初诊方后7剂）", "咳喘明显缓解,白带明显减少,精神转佳,食欲增进"]]}
+{"rel": "HAS_SYMPTOM", "subject": "三诊（2012-6-19）", "question": "三诊（2012-6-19）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "三诊（2012-6-19）", "左侧肢体沉重,如负数十斤重物"]]}
+{"rel": "HAS_SYMPTOM", "subject": "初诊（2001年12月10日）", "question": "初诊（2001年12月10日）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "初诊（2001年12月10日）", "厌食"], ["HAS_SYMPTOM", "初诊（2001年12月10日）", "咯痰"], ["HAS_SYMPTOM", "初诊（2001年12月10日）", "咳嗽"], ["HAS_SYMPTOM", "初诊（2001年12月10日）", "痰粘稠"], ["HAS_SYMPTOM", "初诊（2001年12月10日）", "神疲力乏"]]}
+{"rel": "HAS_SYMPTOM", "subject": "初诊（2014年3月6日远程会诊）", "question": "初诊（2014年3月6日远程会诊）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "初诊（2014年3月6日远程会诊）", "口干"], ["HAS_SYMPTOM", "初诊（2014年3月6日远程会诊）", "大便不下"], ["HAS_SYMPTOM", "初诊（2014年3月6日远程会诊）", "无自主排便"], ["HAS_SYMPTOM", "初诊（2014年3月6日远程会诊）", "智力严重下降"], ["HAS_SYMPTOM", "初诊（2014年3月6日远程会诊）", "精神萎靡"], ["HAS_SYMPTOM", "初诊（2014年3月6日远程会诊）", "面色少华"]]}
+{"rel": "HAS_SYMPTOM", "subject": "三诊（2012年5月11日）", "question": "三诊（2012年5月11日）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "三诊（2012年5月11日）", "睡眠稍差"]]}
+{"rel": "HAS_SYMPTOM", "subject": "气血双亏", "question": "气血双亏有哪些临床表现？", "gold": [["HAS_SYMPTOM", "气血双亏", "口干，唾液粘稠成丝条状"], ["HAS_SYMPTOM", "气血双亏", "舌体瘦削，舌肌软弱，舌上皮萎缩，鲜红变薄"], ["HAS_SYMPTOM", "气血双亏", "面色无华，神疲思睡，气短乏力，吞咽及言语困难"], ["HAS_SYMPTOM", "气血双亏", "麻木刺痛"]]}
+{"rel": "HAS_SYMPTOM", "subject": "表证", "question": "表证有哪些临床表现？", "gold": [["HAS_SYMPTOM", "表证", "咽喉肿痛"], ["HAS_SYMPTOM", "表证", "喷嚏"], ["HAS_SYMPTOM", "表证", "头身疼痛"], ["HAS_SYMPTOM", "表证", "微有咳嗽"], ["HAS_SYMPTOM", "表证", "恶寒发热"], ["HAS_SYMPTOM", "表证", "新起恶风寒"], ["HAS_SYMPTOM", "表证", "气喘"], ["HAS_SYMPTOM", "表证", "流涕"], ["HAS_SYMPTOM", "表证", "鼻塞"]]}
+{"rel": "HAS_SYMPTOM", "subject": "二诊（2013年5月31日）", "question": "二诊（2013年5月31日）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "二诊（2013年5月31日）", "咽痛"], ["HAS_SYMPTOM", "二诊（2013年5月31日）", "寐差减轻"], ["HAS_SYMPTOM", "二诊（2013年5月31日）", "胃脘不适症状消失"]]}
+{"rel": "HAS_SYMPTOM", "subject": "四诊（2015年1月23日）", "question": "四诊（2015年1月23日）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "四诊（2015年1月23日）", "小腹膨隆"], ["HAS_SYMPTOM", "四诊（2015年1月23日）", "白带中夹有血丝"], ["HAS_SYMPTOM", "四诊（2015年1月23日）", "面色晄白"]]}
+{"rel": "HAS_SYMPTOM", "subject": "十七诊（2012年11月23日）", "question": "十七诊（2012年11月23日）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "十七诊（2012年11月23日）", "已能自主蹒跚而行"], ["HAS_SYMPTOM", "十七诊（2012年11月23日）", "轻微干呕"]]}
+{"rel": "HAS_SYMPTOM", "subject": "四诊（2012-8-8）", "question": "四诊（2012-8-8）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "四诊（2012-8-8）", "下肢浮肿消失"], ["HAS_SYMPTOM", "四诊（2012-8-8）", "左侧肢体基本活动自如,无负重感"], ["HAS_SYMPTOM", "四诊（2012-8-8）", "微有头痛"], ["HAS_SYMPTOM", "四诊（2012-8-8）", "言语流利"]]}
+{"rel": "HAS_SYMPTOM", "subject": "抑郁症", "question": "抑郁症有哪些临床表现？", "gold": [["HAS_SYMPTOM", "抑郁症", "显著而持久的抑郁情感或心境改变"]]}
+{"rel": "HAS_SYMPTOM", "subject": "病案2·初诊", "question": "病案2·初诊有哪些临床表现？", "gold": [["HAS_SYMPTOM", "病案2·初诊", "发热"], ["HAS_SYMPTOM", "病案2·初诊", "咳嗽气喘"], ["HAS_SYMPTOM", "病案2·初诊", "唇绀"], ["HAS_SYMPTOM", "病案2·初诊", "无汗"], ["HAS_SYMPTOM", "病案2·初诊", "泄泻稀便"], ["HAS_SYMPTOM", "病案2·初诊", "流清涕"], ["HAS_SYMPTOM", "病案2·初诊", "痰液稀白"], ["HAS_SYMPTOM", "病案2·初诊", "身如燔炭"], ["HAS_SYMPTOM", "病案2·初诊", "面黧"]]}
+{"rel": "HAS_SYMPTOM", "subject": "八诊（2014年1月10日）", "question": "八诊（2014年1月10日）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "八诊（2014年1月10日）", "口干"], ["HAS_SYMPTOM", "八诊（2014年1月10日）", "失眠"], ["HAS_SYMPTOM", "八诊（2014年1月10日）", "心悸"]]}
+{"rel": "HAS_SYMPTOM", "subject": "首诊（2013-05-17）", "question": "首诊（2013-05-17）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "首诊（2013-05-17）", "喜热饮"], ["HAS_SYMPTOM", "首诊（2013-05-17）", "噩梦纷纭"], ["HAS_SYMPTOM", "首诊（2013-05-17）", "寐差"], ["HAS_SYMPTOM", "首诊（2013-05-17）", "胃脘不痛"], ["HAS_SYMPTOM", "首诊（2013-05-17）", "胃脘不适"]]}
+{"rel": "HAS_SYMPTOM", "subject": "上实下虚之肝肾不足、肝阳上亢证", "question": "上实下虚之肝肾不足、肝阳上亢证有哪些临床表现？", "gold": [["HAS_SYMPTOM", "上实下虚之肝肾不足、肝阳上亢证", "头晕"], ["HAS_SYMPTOM", "上实下虚之肝肾不足、肝阳上亢证", "头痛"], ["HAS_SYMPTOM", "上实下虚之肝肾不足、肝阳上亢证", "头胀"], ["HAS_SYMPTOM", "上实下虚之肝肾不足、肝阳上亢证", "急躁易怒"], ["HAS_SYMPTOM", "上实下虚之肝肾不足、肝阳上亢证", "耳鸣"], ["HAS_SYMPTOM", "上实下虚之肝肾不足、肝阳上亢证", "脑鸣"], ["HAS_SYMPTOM", "上实下虚之肝肾不足、肝阳上亢证", "腰膝酸软"], ["HAS_SYMPTOM", "上实下虚之肝肾不足、肝阳上亢证", "面红目赤"]]}
+{"rel": "HAS_SYMPTOM", "subject": "中风", "question": "中风有哪些临床表现？", "gold": [["HAS_SYMPTOM", "中风", "昏仆不遂"]]}
+{"rel": "HAS_SYMPTOM", "subject": "初诊（2013年8月2日）", "question": "初诊（2013年8月2日）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "初诊（2013年8月2日）", "乏力"], ["HAS_SYMPTOM", "初诊（2013年8月2日）", "反应迟缓"], ["HAS_SYMPTOM", "初诊（2013年8月2日）", "困倦思睡"], ["HAS_SYMPTOM", "初诊（2013年8月2日）", "尿黄"], ["HAS_SYMPTOM", "初诊（2013年8月2日）", "答不切题"], ["HAS_SYMPTOM", "初诊（2013年8月2日）", "表情呆板"], ["HAS_SYMPTOM", "初诊（2013年8月2日）", "言语迟缓"], ["HAS_SYMPTOM", "初诊（2013年8月2日）", "近期记忆力明显下降"]]}
+{"rel": "HAS_SYMPTOM", "subject": "二诊（2014年4月17日）", "question": "二诊（2014年4月17日）有哪些临床表现？", "gold": [["HAS_SYMPTOM", "二诊（2014年4月17日）", "胃痛基本缓解"], ["HAS_SYMPTOM", "二诊（2014年4月17日）", "轻微腰酸"]]}
+{"rel": "DERIVED_FROM", "subject": "寒热虚实生死逆顺脏腑辨证八纲", "question": "“寒热虚实生死逆顺脏腑辨证八纲”的学术渊源是什么？", "gold": [["DERIVED_FROM", "寒热虚实生死逆顺脏腑辨证八纲", "中藏经"]]}
+{"rel": "DERIVED_FROM", "subject": "孙氏益气温中汤", "question": "“孙氏益气温中汤”的学术渊源是什么？", "gold": [["DERIVED_FROM", "孙氏益气温中汤", "伤寒论"], ["DERIVED_FROM", "孙氏益气温中汤", "金匮要略"]]}
+{"rel": "DERIVED_FROM", "subject": "六郁致病论", "question": "“六郁致病论”的学术渊源是什么？", "gold": [["DERIVED_FROM", "六郁致病论", "丹溪学派"]]}
+{"rel": "DERIVED_FROM", "subject": "安宫牛黄丸", "question": "“安宫牛黄丸”的学术渊源是什么？", "gold": [["DERIVED_FROM", "安宫牛黄丸", "温病条辨"]]}
+{"rel": "DERIVED_FROM", "subject": "以阴阳、脏腑上下分属虚实诸候", "question": "“以阴阳、脏腑上下分属虚实诸候”的学术渊源是什么？", "gold": [["DERIVED_FROM", "以阴阳、脏腑上下分属虚实诸候", "中藏经"]]}
+{"rel": "DERIVED_FROM", "subject": "孙氏涤痰镇眩汤", "question": "“孙氏涤痰镇眩汤”的学术渊源是什么？", "gold": [["DERIVED_FROM", "孙氏涤痰镇眩汤", "金匮要略"]]}
+{"rel": "DERIVED_FROM", "subject": "阳燔则治以水", "question": "“阳燔则治以水”的学术渊源是什么？", "gold": [["DERIVED_FROM", "阳燔则治以水", "中藏经·阴阳否格论第六"]]}
+{"rel": "DERIVED_FROM", "subject": "白头翁汤", "question": "“白头翁汤”的学术渊源是什么？", "gold": [["DERIVED_FROM", "白头翁汤", "张仲景"]]}
+{"rel": "DERIVED_FROM", "subject": "安神定志汤", "question": "“安神定志汤”的学术渊源是什么？", "gold": [["DERIVED_FROM", "安神定志汤", "金匮要略"]]}
+{"rel": "DERIVED_FROM", "subject": "金匮肾气丸", "question": "“金匮肾气丸”的学术渊源是什么？", "gold": [["DERIVED_FROM", "金匮肾气丸", "金匮要略"]]}
+{"rel": "DERIVED_FROM", "subject": "从顺其宜原则", "question": "“从顺其宜原则”的学术渊源是什么？", "gold": [["DERIVED_FROM", "从顺其宜原则", "中藏经"]]}
+{"rel": "DERIVED_FROM", "subject": "理中丸", "question": "“理中丸”的学术渊源是什么？", "gold": [["DERIVED_FROM", "理中丸", "伤寒论"]]}
+{"rel": "DERIVED_FROM", "subject": "中和", "question": "“中和”的学术渊源是什么？", "gold": [["DERIVED_FROM", "中和", "中藏经"]]}
+{"rel": "DERIVED_FROM", "subject": "阴厥则助以火", "question": "“阴厥则助以火”的学术渊源是什么？", "gold": [["DERIVED_FROM", "阴厥则助以火", "中藏经·阴阳否格论第六"]]}
+{"rel": "DERIVED_FROM", "subject": "乌药顺气散", "question": "“乌药顺气散”的学术渊源是什么？", "gold": [["DERIVED_FROM", "乌药顺气散", "太平惠民和剂局方·治诸风"]]}
+{"rel": "DERIVED_FROM", "subject": "决生死逆顺者少,辨虚实寒热者多", "question": "“决生死逆顺者少,辨虚实寒热者多”的学术渊源是什么？", "gold": [["DERIVED_FROM", "决生死逆顺者少,辨虚实寒热者多", "中藏经"]]}
+{"rel": "DERIVED_FROM", "subject": "以形神为主线的20个辨证元素", "question": "“以形神为主线的20个辨证元素”的学术渊源是什么？", "gold": [["DERIVED_FROM", "以形神为主线的20个辨证元素", "中和思想"]]}
+{"rel": "DERIVED_FROM", "subject": "孙氏建中和胃汤", "question": "“孙氏建中和胃汤”的学术渊源是什么？", "gold": [["DERIVED_FROM", "孙氏建中和胃汤", "伤寒论"], ["DERIVED_FROM", "孙氏建中和胃汤", "金匮要略"]]}
+{"rel": "DERIVED_FROM", "subject": "顾护脾胃学术思想", "question": "“顾护脾胃学术思想”的学术渊源是什么？", "gold": [["DERIVED_FROM", "顾护脾胃学术思想", "朱丹溪"]]}
+{"rel": "DERIVED_FROM", "subject": "孙氏清热利肠汤", "question": "“孙氏清热利肠汤”的学术渊源是什么？", "gold": [["DERIVED_FROM", "孙氏清热利肠汤", "伤寒论"], ["DERIVED_FROM", "孙氏清热利肠汤", "金匮要略"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "崩漏亦可用益母草,可行可止,然须与生地炭配伍", "question": "心法要诀“崩漏亦可用益母草,可行可止,然须与生地炭配伍”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "崩漏亦可用益母草,可行可止,然须与生地炭配伍", "崩漏"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "病痰饮者,温药和之", "question": "心法要诀“病痰饮者,温药和之”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "病痰饮者,温药和之", "中阳不足,痰饮内停"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "四诊合参决生死,尤重切诊", "question": "心法要诀“四诊合参决生死,尤重切诊”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "四诊合参决生死,尤重切诊", "辨生死以脉证相符为准,重脉诊兼顾色泽"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "清者,简约也", "question": "心法要诀“清者,简约也”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "清者,简约也", "清、平、轻、巧、灵"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "女性以月经为本", "question": "心法要诀“女性以月经为本”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "女性以月经为本", "通过调理月经使女性机体气血达到平衡,是治疗女性疾患的重要方法"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "平者,平淡也", "question": "心法要诀“平者,平淡也”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "平者,平淡也", "清、平、轻、巧、灵"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "血瘀者，宜攻归窝补，忌过用峻攻", "question": "心法要诀“血瘀者，宜攻归窝补，忌过用峻攻”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "血瘀者，宜攻归窝补，忌过用峻攻", "攻归窝补"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "浮沉分表里,红紫辨寒热,淡滞定虚实,三关测轻重", "question": "心法要诀“浮沉分表里,红紫辨寒热,淡滞定虚实,三关测轻重”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "浮沉分表里,红紫辨寒热,淡滞定虚实,三关测轻重", "指纹深陷入里纤细色淡现于命关甚者透关射甲多为病重"], ["MAXIM_EXPRESSES", "浮沉分表里,红紫辨寒热,淡滞定虚实,三关测轻重", "指纹隐隐呈微黄而又润泽者多为向愈"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "十不得", "question": "心法要诀“十不得”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "十不得", "立济世之德,修绝世之学,建不世之功,传后世之业"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "首重德行", "question": "心法要诀“首重德行”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "首重德行", "中医人才培养要首重德行、先养慈悲心"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "据七点结合二十辨证元素以辨证分型", "question": "心法要诀“据七点结合二十辨证元素以辨证分型”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "据七点结合二十辨证元素以辨证分型", "小儿咳喘分虚实两大类"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "首重形神辨识,执此主线", "question": "心法要诀“首重形神辨识,执此主线”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "首重形神辨识,执此主线", "以形神为主线的20个辨证元素"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "辨析元素即辨明失中失和", "question": "心法要诀“辨析元素即辨明失中失和”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "辨析元素即辨明失中失和", "失中失和"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "脾胃后天之本,肾为先天之本,二者得调,诸病不死", "question": "心法要诀“脾胃后天之本,肾为先天之本,二者得调,诸病不死”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "脾胃后天之本,肾为先天之本,二者得调,诸病不死", "调和脾胃"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "阴不足则济之以水母,阳不足则注之以火精", "question": "心法要诀“阴不足则济之以水母,阳不足则注之以火精”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "阴不足则济之以水母,阳不足则注之以火精", "调和阴阳"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "三求:求稳、求准、求灵", "question": "心法要诀“三求:求稳、求准、求灵”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "三求:求稳、求准、求灵", "中和组方"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "车前子具止泻作用,需盐水炒过、研末口服", "question": "心法要诀“车前子具止泻作用,需盐水炒过、研末口服”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "车前子具止泻作用,需盐水炒过、研末口服", "滋阴通便"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "湿热者，宜暂用清热利湿；忌久用苦燥之药", "question": "心法要诀“湿热者，宜暂用清热利湿；忌久用苦燥之药”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "湿热者，宜暂用清热利湿；忌久用苦燥之药", "清热利湿"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "轻者,用药量轻也", "question": "心法要诀“轻者,用药量轻也”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "轻者,用药量轻也", "清、平、轻、巧、灵"]]}
+{"rel": "MAXIM_EXPRESSES", "subject": "继承不泥古,创新不离宗", "question": "心法要诀“继承不泥古,创新不离宗”阐述了什么思想？", "gold": [["MAXIM_EXPRESSES", "继承不泥古,创新不离宗", "中和组方"]]}
+{"rel": "CITES", "subject": "中藏经·阴阳大要调神论第二", "question": "“中藏经·阴阳大要调神论第二”引用了哪些经典？", "gold": [["CITES", "中藏经·阴阳大要调神论第二", "中藏经"]]}
+{"rel": "CITES", "subject": "劳则气耗", "question": "“劳则气耗”引用了哪些经典？", "gold": [["CITES", "劳则气耗", "素问·举痛论"]]}
+{"rel": "CITES", "subject": "泰山磐石散", "question": "“泰山磐石散”引用了哪些经典？", "gold": [["CITES", "泰山磐石散", "景岳全书·妇人规"]]}
+{"rel": "CITES", "subject": "白牛膝", "question": "“白牛膝”引用了哪些经典？", "gold": [["CITES", "白牛膝", "滇南本草"]]}
+{"rel": "CITES", "subject": "脉虚者人参汤下,脉实者银花、薄荷汤下", "question": "“脉虚者人参汤下,脉实者银花、薄荷汤下”引用了哪些经典？", "gold": [["CITES", "脉虚者人参汤下,脉实者银花、薄荷汤下", "温病条辨"]]}
+{"rel": "CITES", "subject": "男子属阳以肾为先天,女子属阴以肝为先天", "question": "“男子属阳以肾为先天,女子属阴以肝为先天”引用了哪些经典？", "gold": [["CITES", "男子属阳以肾为先天,女子属阴以肝为先天", "素问·上古天真论"]]}
+{"rel": "CITES", "subject": "云茯神", "question": "“云茯神”引用了哪些经典？", "gold": [["CITES", "云茯神", "神农本草经"]]}
+{"rel": "CITES", "subject": "煅牡蛎", "question": "“煅牡蛎”引用了哪些经典？", "gold": [["CITES", "煅牡蛎", "汤液本草"], ["CITES", "煅牡蛎", "珍珠囊"]]}
+{"rel": "CITES", "subject": "中和组方思路与方法", "question": "“中和组方思路与方法”引用了哪些经典？", "gold": [["CITES", "中和组方思路与方法", "太平惠民和剂局方"]]}
+{"rel": "CITES", "subject": "形神之和", "question": "“形神之和”引用了哪些经典？", "gold": [["CITES", "形神之和", "素问·调经论"]]}
+{"rel": "CITES", "subject": "治咳先治痰,治痰先下气", "question": "“治咳先治痰,治痰先下气”引用了哪些经典？", "gold": [["CITES", "治咳先治痰,治痰先下气", "素问病机气宜保命集"]]}
+{"rel": "CITES", "subject": "大腹皮", "question": "“大腹皮”引用了哪些经典？", "gold": [["CITES", "大腹皮", "本经逢原"]]}
+{"rel": "CITES", "subject": "重视天人合一的养生思想", "question": "“重视天人合一的养生思想”引用了哪些经典？", "gold": [["CITES", "重视天人合一的养生思想", "中藏经·人法于天地论第一"]]}
+{"rel": "CITES", "subject": "中藏经·人法于天地论第一", "question": "“中藏经·人法于天地论第一”引用了哪些经典？", "gold": [["CITES", "中藏经·人法于天地论第一", "中藏经"]]}
+{"rel": "CITES", "subject": "形神一体观", "question": "“形神一体观”引用了哪些经典？", "gold": [["CITES", "形神一体观", "医学心传"], ["CITES", "形神一体观", "灵枢·平人绝ue"], ["CITES", "形神一体观", "灵枢·本神"], ["CITES", "形神一体观", "灵枢·营卫生会"], ["CITES", "形神一体观", "素问·三部九候论"], ["CITES", "形神一体观", "素问·六节藏象论"], ["CITES", "形神一体观", "素问·经脉别论"], ["CITES", "形神一体观", "难经·十四难"], ["CITES", "形神一体观", "黄帝内经"]]}
+{"rel": "CITES", "subject": "肾气丸", "question": "“肾气丸”引用了哪些经典？", "gold": [["CITES", "肾气丸", "医经溯洄集"], ["CITES", "肾气丸", "千金方衍义"]]}
+{"rel": "CITES", "subject": "生脉散", "question": "“生脉散”引用了哪些经典？", "gold": [["CITES", "生脉散", "内外伤辨惑论·卷中·暑伤胃气论"], ["CITES", "生脉散", "内外伤辨惑论·卷之中·暑伤胃气论"]]}
+{"rel": "CITES", "subject": "旺晦", "question": "“旺晦”引用了哪些经典？", "gold": [["CITES", "旺晦", "灵枢·百病始生"]]}
+{"rel": "CITES", "subject": "中藏经》脏腑八纲辨证", "question": "“中藏经》脏腑八纲辨证”引用了哪些经典？", "gold": [["CITES", "中藏经》脏腑八纲辨证", "中藏经"]]}
+{"rel": "CITES", "subject": "清宫汤", "question": "“清宫汤”引用了哪些经典？", "gold": [["CITES", "清宫汤", "温病条辨"]]}
