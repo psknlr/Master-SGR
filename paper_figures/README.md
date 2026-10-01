@@ -5,7 +5,10 @@
 ```bash
 pip install matplotlib networkx scipy python-docx numpy pillow   # 另需 Graphviz（dot / neato）与 Noto CJK 字体
 python3 paper_figures/src/make_all.py                             # 约 50 s
+python3 paper_figures/src/manuscript.py                           # 生成论文手稿 docx
 ```
+
+论文手稿：`output/论文手稿_孙光荣中和学术思想专题知识图谱与可溯源智能问答研究.docx`（黄色高亮【 】处为需作者补充或核实的内容）。
 
 - 数据源：`android/app/src/main/assets/web/data/graph.json`（图谱 v2.0.0，本体 v1.2.3）
 - 检索实现：`rag/kg_rag.py`（评测直接调用 `KGRag.retrieve`，未做任何修改）
